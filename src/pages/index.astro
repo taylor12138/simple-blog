@@ -7,6 +7,7 @@ import {SiGithub} from 'solid-icons/si';
 import {SITE_TITLE, SITE_DESCRIPTION, GLOBAL_STYLE, BIO, AVATAR_SRC} from '../consts';
 import Card from '@/components/Card.astro';
 import PostCard from "../components/PostCard.astro";
+import AComponent from '../solid/AComponent';
 
 const posts = (await getCollection('blog'))
     .filter(post => post.data.pinned)
@@ -23,7 +24,9 @@ const posts = (await getCollection('blog'))
 <Header/>
 <main>
     <Card variant={GLOBAL_STYLE} id="avatar-bio">
-        <img src={AVATAR_SRC} alt="avatar"/>
+        <img src={AVATAR_SRC} alt="avatar" style={{
+            'object-fit': 'cover'
+        }}/>
         <section id="bio">
             <h2 class="emphasize">
                 {SITE_TITLE}
@@ -37,6 +40,7 @@ const posts = (await getCollection('blog'))
                         Contact me:
                     </strong>
                 </p>
+                <AComponent client:only="solid-js"/>
                 <div id="contact">
                     <a class="icon-link" href="https://github.com/taylor12138/simple-blog" target="_blank" aria-label="GitHub">
                         <SiGithub size={32} />

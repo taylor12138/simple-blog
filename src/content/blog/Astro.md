@@ -118,3 +118,87 @@ npm create astro@latest -- --template <example-name>
 npm create astro@latest -- --template <github-username>/<github-repo>
 ```
 
+
+
+
+
+## 使用多个框架
+
+当你在同一个项目中使用多个 JSX 框架（React、Preact、Solid）时，Astro 需要确定每个组件应该使用哪个 JSX 框架的转换器（transformation）。如果你只向你的项目中添加了一个 JSX 框架集成，那么就不需要额外的配置。
+
+使用 `include`（必填）和 `exclude`（可选）配置选项来指定哪些文件属于哪个框架。为你使用的每个框架提供一个文件或/和文件夹数组。通配符可用于包含多个文件路径。
+
+我们建议将每个框架的组件放在同一个文件夹中（例如 `/components/react/` 和 `/components/solid/`），以便更容易地指定你的包含内容，但这不是必需的：
+
+astro.config.mjs
+
+```js
+import { defineConfig } from 'astro/config';
+import preact from '@astrojs/preact';
+import react from '@astrojs/react';
+import svelte from '@astrojs/svelte';
+import vue from '@astrojs/vue';
+import solid from '@astrojs/solid-js';
+
+export default defineConfig({
+  // 启用多个框架来支持所有不同类型的组件。
+  // 如果你只使用一个 JSX 框架，则不需要 `include`！
+  integrations: [
+    preact({
+      include: ['**/preact/*'],
+    }),
+    react({
+      include: ['**/react/*'],
+    }),
+    solid({
+      include: ['**/solid/*', '**/node_modules/@suid/material/**'],
+    }),
+  ],
+
+});
+```
+
+
+
+然后我们在astro里使用这些ui组件
+
+在 Astro 页面、布局和组件中就像 Astro 组件一样使用你的 JavaScript 框架组件。所有组件都可放在 `/src/components` 目录中，或者你也可以放在任何你喜欢的地方。
+
+要使用框架组件，你需要在 Astro 组件脚本中使用相对路径导入它们。然后在其他组件、HTML 元素和类 JSX 表达式中使用它们。
+
+src/pages/static-components.astro
+
+```jsx
+import MyReactComponent from '../components/MyReactComponent.jsx';
+
+<html>
+  <body>
+    <h1>Use React components directly in Astro!</h1>
+    <MyReactComponent />
+  </body>
+</html>
+```
+
+默认情况下，你的框架组件将渲染为静态 HTML。这对于模板组件而言非常有用，它不需要交互和避免分发没用的 JavaScript 给用户。
+
+
+
+#### 激活组件
+
+针对可交互的组件，需要靠指令来激活
+
+### `client:only`
+
+[段落标题 client:only](https://docs.astro.build/zh-cn/reference/directives-reference/#clientonly)
+
+`client:only={string}` **跳过** HTML 服务端渲染，只在客户端进行渲染。它的作用类似于 `client:load`，它在页面加载时立即加载、渲染和润色组件。
+
+**你必须正确传递组件所用框架！** 因为 Astro 不会在构建过程中/在服务器上运行该组件，Astro 不知道你的组件使用什么框架，除非你明确告诉它。
+
+```jsx
+<SomeReactComponent client:only="react" />
+<SomePreactComponent client:only="preact" />
+<SomeSvelteComponent client:only="svelte" />
+<SomeVueComponent client:only="vue" />
+<SomeSolidComponent client:only="solid-js" />
+```

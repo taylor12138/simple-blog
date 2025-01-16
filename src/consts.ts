@@ -7,7 +7,7 @@ export const SITE_DESCRIPTION = 'A blog about SolidJS, Astro, and taylor12138 de
 
 export const FAVICON_SRC = '/favicon.ico?v=1';
 
-export const AVATAR_SRC = '/avatar.avif';
+export const AVATAR_SRC = '/avatar.jpg';
 
 export const BIO = "这是一个个人博客，不定时记录一些学习笔记和开发经验。"
 
