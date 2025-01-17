@@ -1,8 +1,10 @@
 ---
 import Card from "./Card.astro";
+import  { Title, Font } from 'p5-react-component';
 import {GLOBAL_STYLE} from "@/consts";
 import "@/styles/components.scss";
 import '@/styles/global.scss';
+import  'p5-react-component/dist/global.less'
 
 interface Props {
     slug: string
@@ -27,24 +29,22 @@ const {slug, heroImage, title, pubDate, description} = Astro.props
         {
             heroImage === undefined ?
                 (
-                    <h4 class="emphasize">
-                        {title}
-                    </h4>
+                    <Title content={title} client:only="react" />
                 )
                 : <img src={heroImage} alt={title} loading="lazy"/>
         }
     </a>
     <h4>
         <a class="link" href={`/blog/${slug}`}>
-            {title}
+            <Title content={title} client:only="react" />
         </a>
     </h4>
-    <p>
+    <Font client:only="react">
         {description}
-    </p>
-    <p class="date">
+    </Font>
+    <Font className="date" client:only="react">
         {pubDate.toLocaleDateString()}
-    </p>
+    </Font>
 </Card>
 
 <style lang="scss">

@@ -1,3 +1,5 @@
+// For Solid
+/** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
 
 export default function AComponent() {

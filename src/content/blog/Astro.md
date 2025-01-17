@@ -158,6 +158,61 @@ export default defineConfig({
 });
 ```
 
+注意：如果直接在astro文件里使用到的框架组件，也需要包含在include中，比如：
+
+```jsx
+import {SiGithub} from 'solid-icons/si';
+
+<SiGithub size={32} />
+```
+
+```js
+import { defineConfig, passthroughImageService } from "astro/config";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import solidJs from "@astrojs/solid-js";
+import react from "@astrojs/react";
+
+// https://astro.build/config
+export default defineConfig({
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [
+      [
+        rehypeKatex,
+        {
+          // Katex plugin options
+        },
+      ],
+    ],
+  },
+
+  image: {
+    service: passthroughImageService(),
+  },
+  vite: {
+    resolve: {
+      alias: {
+        "@": "/src",
+      },
+    },
+  },
+  site: "https://blog.plr.moe",
+  integrations: [
+    mdx(),
+    sitemap(),
+    solidJs({
+        include: ['**/solid/*', '**/node_modules/solid-icons/**'],
+    }),
+    react({
+        include: ['**/react/*'],
+    }),
+  ],
+});
+```
+
 
 
 然后我们在astro里使用这些ui组件
@@ -180,6 +235,12 @@ import MyReactComponent from '../components/MyReactComponent.jsx';
 ```
 
 默认情况下，你的框架组件将渲染为静态 HTML。这对于模板组件而言非常有用，它不需要交互和避免分发没用的 JavaScript 给用户。
+
+
+
+#### 多框架带来的ts问题
+
+[解决方法](https://docs.astro.build/zh-cn/guides/typescript/#%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA-jsx-%E6%A1%86%E6%9E%B6%E6%89%80%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%B1%BB%E5%9E%8B%E9%94%99%E8%AF%AF)
 
 
 

@@ -7,7 +7,8 @@ import {SiGithub} from 'solid-icons/si';
 import {SITE_TITLE, SITE_DESCRIPTION, GLOBAL_STYLE, BIO, AVATAR_SRC} from '../consts';
 import Card from '@/components/Card.astro';
 import PostCard from "../components/PostCard.astro";
-import AComponent from '../solid/AComponent';
+import BComponent from '../components/react/BComponent';
+import AComponent from '../components/solid/AComponent';
 
 const posts = (await getCollection('blog'))
     .filter(post => post.data.pinned)
@@ -40,7 +41,6 @@ const posts = (await getCollection('blog'))
                         Contact me:
                     </strong>
                 </p>
-                <AComponent client:only="solid-js"/>
                 <div id="contact">
                     <a class="icon-link" href="https://github.com/taylor12138/simple-blog" target="_blank" aria-label="GitHub">
                         <SiGithub size={32} />
@@ -49,7 +49,10 @@ const posts = (await getCollection('blog'))
             </div>
         </section>
     </Card>
-
+    <div>
+        <AComponent client:only="solid-js"/>
+        <BComponent client:only="react"/>
+    </div>
     <Card variant={GLOBAL_STYLE}>
         <h3>
             Pinned Posts
