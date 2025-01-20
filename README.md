@@ -1,13 +1,6 @@
-# Koibumi Astro Blog
+# Welcome to my Blog 🚀 🚀 🚀
+just a simple blog to record my learning process
+A Blog created　built with Astro and Solid.
 
-A astro blog template with [koibumi design system](https://github.com/koibumi-design)
-
-## Installation
-
-Just import this repository to your GitHub account, then clone it to your local machine.
-
-```bash
-git clone https://github.com/koibumi-design/astro-blog.git
-```
-
-Now, read the [documentation](https://astro.koibumi.art/) to learn how to use this template.
+template：
+A astro blog template with [taylor12138 Design system](https://github.com/koibumi-design)

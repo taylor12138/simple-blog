@@ -18,7 +18,7 @@ pinned: true
 ```ts
 export const SITE_TITLE = 'Koibumi Blog';
 
-export const SITE_DESCRIPTION = 'A blog about SolidJS, Astro, and koibumi design.';
+export const SITE_DESCRIPTION = 'A blog about SolidJS, Astro, and taylor12138 Design.';
 
 export const FAVICON_SRC = '/favicon.svg';
 
@@ -28,7 +28,7 @@ export const BIO = " Welcome to my website! I write about programming, technolog
 
 export const GLOBAL_STYLE: 'quartz' | 'glass' | 'lightGlass' = 'glass'
 
-export const COPYRIGHT_NAME = 'Koibumi Design';
+export const COPYRIGHT_NAME = 'taylor12138 Design';
 ```
 
 | 属性              | 描述                                                                         |
