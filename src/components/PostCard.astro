@@ -36,7 +36,7 @@ const {slug, heroImage, title, pubDate, description} = Astro.props
     </a>
     <h4>
         <a class="link" href={`/blog/${slug}`}>
-            <Title content={title} client:only="react" />
+            <Font client:only="react" >{title}</Font>
         </a>
     </h4>
     <Font client:only="react">
