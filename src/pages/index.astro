@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import {getCollection} from 'astro:content';
-import {SiGithub} from 'solid-icons/si';
+import { SiGithub } from 'solid-icons/si';
 import {SITE_TITLE, SITE_DESCRIPTION, GLOBAL_STYLE, BIO, AVATAR_SRC} from '../consts';
 import Card from '@/components/Card.astro';
 import PostCard from "../components/PostCard.astro";
@@ -137,6 +137,5 @@ const posts = (await getCollection('blog'))
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
-        margin-top: -1.5rem;
     }
 </style>

@@ -27,6 +27,7 @@
   border: $color-slate-400 1px solid;
   background-color: $color-slate-30;
   box-shadow: 0.125rem 0.125rem 0.5rem rgba($color-slate-700, 0.2);
+  transition: all 0.2s ease-in-out 0s;
 
   &.dark-mode {
     background-color: $color-slate-800;
@@ -45,6 +46,12 @@
     &.no-shadow {
       box-shadow: none;
     }
+  }
+
+  &:hover {
+    background-color: #f0f0f0;
+    box-shadow: 6px 6px 1px 1px #0a071723;
+    transform: translateY(-6px);
   }
 
   > *:not(:last-child) {
