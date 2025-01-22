@@ -19,6 +19,10 @@ article {
     margin-top: .75em;
   }
 
+  img {
+    max-width: 100%!important;
+  }
+
   h1,
   h2,
   h3,
@@ -123,10 +127,6 @@ article {
     text-underline-offset: 0.1em;
     cursor: pointer;
     transition: background-color 0.25s ease;
-
-    &:hover {
-      background-color: $color-primary-100;
-    }
   }
 
   li {

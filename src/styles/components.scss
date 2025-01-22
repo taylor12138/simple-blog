@@ -6,18 +6,6 @@
   text-underline-offset: 0.1em;
   cursor: pointer;
   transition: background-color 0.25s ease;
-
-  &:hover {
-    background-color: $color-primary-100;
-  }
-
-  &.dark-mode {
-    color: $color-primary-400;
-
-    &:hover {
-      background-color: $color-primary-800;
-    }
-  }
 }
 
 
@@ -45,6 +33,10 @@
 
     &.no-shadow {
       box-shadow: none;
+    }
+
+    img {
+        max-width: 100%;
     }
   }
 
