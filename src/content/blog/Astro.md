@@ -120,6 +120,14 @@ npm create astro@latest -- --template <github-username>/<github-repo>
 
 
 
+#### 配置prettier、eslint
+
+详情[请看](https://docs.astro.build/zh-cn/editor-setup/#eslint)
+
+对于项目想要单独配置保存后自动格式化，可以[参考](https://blog.csdn.net/qq_37815596/article/details/109225879)
+
+然后我们在本项目的.vscode下新建setting.json文件进行配置，防止影响到其他项目
+
 
 
 ## 使用多个框架

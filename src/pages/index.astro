@@ -1,141 +1,146 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import {getCollection} from 'astro:content';
-import { SiGithub } from 'solid-icons/si';
-import {SITE_TITLE, SITE_DESCRIPTION, GLOBAL_STYLE, BIO, AVATAR_SRC} from '../consts';
-import Card from '@/components/Card.astro';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
+import { SiGithub } from "solid-icons/si";
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  GLOBAL_STYLE,
+  BIO,
+  AVATAR_SRC,
+} from "../consts";
+import Card from "@/components/Card.astro";
 import PostCard from "../components/PostCard.astro";
 
-const posts = (await getCollection('blog'))
-    .filter(post => post.data.pinned)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
+const posts = (await getCollection("blog"))
+  .filter((post) => post.data.pinned)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
 <html lang="en">
-<head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}/>
-</head>
-<body>
-<Header/>
-<main>
-    <Card variant={GLOBAL_STYLE} id="avatar-bio">
-        <img src={AVATAR_SRC} alt="avatar" style={{
-            'object-fit': 'cover'
-        }}/>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <Card variant={GLOBAL_STYLE} id="avatar-bio">
+        <img
+          src={AVATAR_SRC}
+          alt="avatar"
+          style={{
+            "object-fit": "cover",
+          }}
+        />
         <section id="bio">
-            <h2 class="emphasize">
-                {SITE_TITLE}
-            </h2>
+          <h2 class="emphasize">
+            {SITE_TITLE}
+          </h2>
+          <p>
+            {BIO}
+          </p>
+          <div>
             <p>
-                {BIO}
+              <strong> Contact me: </strong>
             </p>
-            <div>
-                <p>
-                    <strong>
-                        Contact me:
-                    </strong>
-                </p>
-                <div id="contact">
-                    <a class="icon-link" href="https://github.com/taylor12138/simple-blog" target="_blank" aria-label="GitHub">
-                        <SiGithub size={32} />
-                    </a>
-                </div>
+            <div id="contact">
+              <a
+                class="icon-link"
+                href="https://github.com/taylor12138/simple-blog"
+                target="_blank"
+                aria-label="GitHub"
+              >
+                <SiGithub size={32} />
+              </a>
             </div>
+          </div>
         </section>
-    </Card>
-    <Card variant={GLOBAL_STYLE}>
-        <h3>
-            Pinned Posts
-        </h3>
-    </Card>
-    <section id="pinned-container">
-        {
-            posts.map((post) => (
-                    <PostCard {...post.data} slug={post.slug}/>
-            ))
-        }
-    </section>
-
-</main>
-<Footer/>
-</body>
+      </Card>
+      <Card variant={GLOBAL_STYLE}>
+        <h3>Pinned Posts</h3>
+      </Card>
+      <section id="pinned-container">
+        {posts.map((post) => <PostCard {...post.data} slug={post.slug} />)}
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>
 
 <style>
-    main {
-        max-width: 70rem;
-        width: 100%;
-        margin: 3rem auto;
-        padding: 0 1rem;
-    }
+  main {
+    max-width: 70rem;
+    width: 100%;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
 
-    main > * {
-        margin-bottom: 2rem;
-    }
+  main > * {
+    margin-bottom: 2rem;
+  }
 
-    main > *:last-child {
-        margin-bottom: 0;
-    }
+  main > *:last-child {
+    margin-bottom: 0;
+  }
 
+  #avatar-bio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  #avatar-bio > img {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+  }
+
+  #bio {
+    max-width: 20rem;
+  }
+
+  @media (max-width: 700px) {
     #avatar-bio {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 3rem;
-    }
-
-    #avatar-bio > img {
-        width: 15rem;
-        height: 15rem;
-        border-radius: 50%;
+      flex-direction: column;
     }
 
     #bio {
-        max-width: 20rem;
+      max-width: 100%;
     }
+  }
 
-    @media (max-width: 700px) {
-        #avatar-bio {
-            flex-direction: column;
-        }
+  #bio > p {
+    line-height: 1.5;
+    letter-spacing: 0.02rem;
+  }
 
-        #bio {
-            max-width: 100%;
-        }
-    }
+  #bio > * {
+    margin-bottom: 0.75rem;
+  }
 
-    #bio > p {
-        line-height: 1.5;
-        letter-spacing: .02rem;
-    }
+  #bio > *:last-child {
+    margin-bottom: 0;
+  }
 
-    #bio > * {
-        margin-bottom: 0.75rem;
-    }
+  #contact {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
 
-    #bio > *:last-child {
-        margin-bottom: 0;
-    }
+  .icon-link {
+    height: 2rem;
+    width: 2rem;
+  }
 
-    #contact {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-top: .25rem
-    }
-
-    .icon-link {
-        height: 2rem;
-        width: 2rem;
-    }
-
-    #pinned-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1rem;
-    }
+  #pinned-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
 </style>
