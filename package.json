@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "png": "find public -type f -name \"*.png\" -exec pngquant --quality=65-80 --ext .png --force {} \\;"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

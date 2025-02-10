@@ -99,7 +99,7 @@ Vue对象传入的option：
 
 官网附有生命周期示意图
 
-![](/Vue(上)/vue_life-1615514534331.jpg)
+![](/Vue(上)/vue_life-1615514534331.png)
 
 还有keep-alive独有的 `activated` 和 `deactivated`
 
