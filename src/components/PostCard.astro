@@ -1,100 +1,97 @@
 ---
 import Card from "./Card.astro";
-import  { Title, Font } from 'p5-react-component';
-import {GLOBAL_STYLE} from "@/consts";
+import { Title, Font } from "p5-react-component";
+import { GLOBAL_STYLE } from "@/consts";
 import "@/styles/components.scss";
-import '@/styles/global.scss';
-import  'p5-react-component/dist/global.less'
+import "@/styles/global.scss";
+import "p5-react-component/dist/global.less";
 
 interface Props {
-    slug: string
-    heroImage?: string
-    title: string
-    pubDate: Date
-    description?: string
+  slug: string;
+  heroImage?: string;
+  title: string;
+  pubDate?: Date;
+  description?: string;
 }
 
-const {slug, heroImage, title, pubDate, description} = Astro.props
-
+const { slug, heroImage, title, pubDate, description } = Astro.props;
 ---
 
-<Card
-    class="post-card"
-    variant={GLOBAL_STYLE}
->
-    <a
-        class='img-container'
-        href={`/blog/${slug}`}
-    >
-        {
-            heroImage === undefined ?
-                (
-                    <Title content={title} client:only="react" />
-                )
-                : <img src={heroImage} alt={title} loading="lazy"/>
-        }
+<Card class="post-card" variant={GLOBAL_STYLE}>
+  <a class="img-container" href={`/blog/${slug}`}>
+    {
+      heroImage === undefined ? (
+        <Title content={title} client:only="react" />
+      ) : (
+        <img src={heroImage} alt={title} loading="lazy" />
+      )
+    }
+  </a>
+  <h4>
+    <a class="link" href={`/blog/${slug}`}>
+      <Font client:only="react">{title}</Font>
     </a>
-    <h4>
-        <a class="link" href={`/blog/${slug}`}>
-            <Font client:only="react" >{title}</Font>
-        </a>
-    </h4>
-    <Font client:only="react">
-        {description}
-    </Font>
-    <Font className="date" client:only="react">
+  </h4>
+  <Font client:only="react">
+    {description}
+  </Font>
+  {
+    pubDate && (
+      <Font className="date" client:only="react">
         {pubDate.toLocaleDateString()}
-    </Font>
+      </Font>
+    )
+  }
 </Card>
 
 <style lang="scss">
-    @import "../styles/colors.scss";
+  @import "../styles/colors.scss";
 
-    .post-card {
-        padding-bottom: 2rem;
+  .post-card {
+    padding-bottom: 2rem;
 
-        & > h4 {
-            margin-top: 1rem;
-        }
+    & > h4 {
+      margin-top: 1rem;
+    }
+  }
+
+  .date {
+    text-align: right;
+    position: absolute;
+    font-size: 0.875rem;
+    bottom: 0.875rem;
+    right: 0.875rem;
+  }
+
+  .img-container {
+    aspect-ratio: 16/9;
+    overflow: clip;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.75rem;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .date {
-        text-align: right;
-        position: absolute;
-        font-size: 0.875rem;
-        bottom: 0.875rem;
-        right: 0.875rem;
+    & > * {
+      transition: transform 0.3s ease-in-out;
     }
 
-    .img-container {
-        aspect-ratio: 16/9;
-        overflow: clip;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 0.75rem;
-        cursor: pointer;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        & > * {
-            transition: transform 0.3s ease-in-out;
-        }
-
-        & > *:hover {
-            transform: scale(1.2);
-        }
-
-        &:has(h4) {
-            background-color: rgba($color-slate-100, 0.5);
-        }
-
-        h4 {
-            wrap-option: wrap;
-        }
+    & > *:hover {
+      transform: scale(1.2);
     }
+
+    &:has(h4) {
+      background-color: rgba($color-slate-100, 0.5);
+    }
+
+    h4 {
+      wrap-option: wrap;
+    }
+  }
 </style>

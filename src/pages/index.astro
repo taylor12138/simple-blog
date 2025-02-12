@@ -16,7 +16,12 @@ import PostCard from "../components/PostCard.astro";
 
 const posts = (await getCollection("blog"))
   .filter((post) => post.data.pinned)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a, b) => {
+    if (!a.data.pubDate && !b.data.pubDate) return 0;
+    if (!a.data.pubDate) return 1;
+    if (!b.data.pubDate) return -1;
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  });
 ---
 
 <!doctype html>
