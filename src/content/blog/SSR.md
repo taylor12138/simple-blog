@@ -90,7 +90,7 @@ SSR劣势
 
 - 将代码生成commonjs格式产物，让前端服务器（node）可以正常加载（随着nodejs对esm的支持成熟程度增加，也在不断变得友好）
 
-  ![](/Nodejs/SSR1.png)
+  ![](/Nodejs/ssr10.png)
 
 - 移除代码样式引入 
 
