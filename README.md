@@ -1,7 +1,8 @@
 # Welcome to my Blog 🚀 🚀 🚀
 
 一个简单的记录博客
-技术框架 AstroV5 and Solid.
+技术框架 AstroV5 && Solid && Reactjs.
+(Solid + React混动)
 
 template：
 A astro blog template with [Koibumi Design system](https://github.com/koibumi-design)
