@@ -18,7 +18,7 @@ npm run png
 ```
 
 ```shell
-npm run jpg
+npm run jpeg
 ```
 
 之前可以先安装对应工具(MacOS)
