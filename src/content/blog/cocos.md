@@ -143,6 +143,68 @@ if (this.BodyAnim) {
 
 
 
+或者像这样，通过ui组件内引用，进行适配
+
+```ts
+import { _decorator, Component, EventTouch, input, Node, Vec3, Input, Prefab, instantiate } from 'cc';
+const { ccclass, property } = _decorator;
+
+@ccclass('play_ui')
+export class play_ui extends Component {
+    @property
+    shootRate = 0.5;
+
+    @property
+    shootTimer = 0;  
+
+    @property(Prefab)
+    bulletPrefab: Prefab = null;
+
+    @property(Node)
+    bulletParent: Node = null;
+
+    // 主要用于定义子弹发射的位置
+    @property(Node)
+    bulletPosition: Node = null;
+
+    protected onLoad(): void {
+        input.on(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    }
+
+    protected onDestroy(): void {
+        input.off(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    }
+
+    public onTouchMove(e: EventTouch): void {
+        const p = this.node.position;
+        const targetPostion = new Vec3(p.x + e.getDeltaX(), p.y + e.getDeltaY(), p.z);
+        if(targetPostion.x < -230 || targetPostion.x > 230 || targetPostion.y < -380 || targetPostion.y > 380) {
+            return;
+        }
+        this.node.setPosition(targetPostion);
+    }
+
+    protected update(dt: number): void {
+        this.shootTimer += dt;
+        if(this.shootTimer >= this.shootRate) {
+            this.shootTimer = 0;
+            // 实例化预制件
+            const bullet = instantiate(this.bulletPrefab);
+
+            this.bulletParent.addChild(bullet);
+            // 设置世界坐标
+            bullet.setWorldPosition(this.bulletPosition.worldPosition); 
+        }
+    }
+}
+
+
+```
+
+![](/js游戏框架合集/prefab1.png)
+
+
+
 #### meta文件
 
 Cocos Creator 会为 assets 目录下的每一个文件和目录生成一个同名的 meta 文件，相信大家一定不会太陌生。理解 Creator 生成 meta 文件的作用和机理，能帮助您和您的团队解决在多人开发时常会遇到的资源冲突、文件丢失、组件属性丢失等问题。那 meta 文件是做什么用的呢，详情可以看 [此处](https://docs.cocos.com/creator/3.8/manual/zh/asset/meta.html)
