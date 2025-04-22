@@ -29,16 +29,8 @@ export default defineConfig({
                 "@": "/src",
             },
         },
-        css: {
-            devSourcemap: true,
-        },
     },
-    site: process.env.GITHUB_ACTIONS ? "https://taylor12138.github.io/simple-blog/" : "https://blog.plr.moe",
-    base: process.env.GITHUB_ACTIONS ? "/simple-blog" : "",
-    build: {
-        assets: "_assets",
-        cssMinify: true,
-    },
+    site: "https://blog.plr.moe",
     integrations: [
         mdx(),
         sitemap(),
