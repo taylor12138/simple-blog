@@ -30,12 +30,9 @@ export default defineConfig({
             },
         },
     },
-    site: process.env.GITHUB_ACTIONS ? "https://taylor12138.github.io/simple-blog/" : "https://blog.plr.moe",
-    base: "/",
-    trailingSlash: "never",
-    build: {
-        assets: "_assets",
-    },
+    site: process.env.GITHUB_ACTIONS ? "https://taylor12138.github.io" : "https://blog.plr.moe",
+    base: process.env.GITHUB_ACTIONS ? "/simple-blog/" : "/",
+
     integrations: [
         mdx(),
         sitemap(),
