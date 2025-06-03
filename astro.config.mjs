@@ -30,8 +30,8 @@ export default defineConfig({
             },
         },
     },
-    site: process.env.GITHUB_ACTIONS ? "https://taylor12138.github.io" : "https://blog.plr.moe",
-    base: process.env.GITHUB_ACTIONS ? "/simple-blog/" : "/",
+    site: "https://taylor12138.github.io",
+    base: "/simple-blog/",
 
     integrations: [
         mdx(),

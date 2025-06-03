@@ -14,11 +14,12 @@ interface Props {
   description?: string;
 }
 
+const baseUrl = import.meta.env.BASE_URL;
 const { slug, heroImage, title, pubDate, description } = Astro.props;
 ---
 
 <Card class="post-card" variant={GLOBAL_STYLE}>
-  <a class="img-container" href={`/blog/${slug}`}>
+  <a class="img-container" href={`${baseUrl}blog/${slug}`}>
     {
       heroImage === undefined ? (
         <Title content={title} client:only="react" />

@@ -1,13 +1,15 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
+const baseUrl = import.meta.env.BASE_URL;
+
 export const SITE_TITLE = 'taylor12138 Blog';
 
 export const SITE_DESCRIPTION = 'A blog about SolidJS, Astro, and taylor12138 design.';
 
-export const FAVICON_SRC = '/favicon.ico?v=1';
+export const FAVICON_SRC = `${baseUrl}favicon.ico?v=1`;
 
-export const AVATAR_SRC = '/avatar.jpg';
+export const AVATAR_SRC = `${baseUrl}avatar.jpg`;
 
 export const BIO = "这是一个个人博客，不定时记录一些学习笔记和开发经验。"
 
