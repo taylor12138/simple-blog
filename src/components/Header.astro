@@ -4,6 +4,7 @@ import Card from './Card.astro';
 import {GLOBAL_STYLE, SITE_TITLE} from '../consts';
 import "@/styles/components.scss";
 import {clsx} from "clsx";
+import DealWithA from './DealWithA.astro';
 ---
 
 <header
@@ -16,9 +17,9 @@ import {clsx} from "clsx";
 >
   <nav>
     <h1>
-      <a href="/" id="title" class="link">
+      <DealWithA href="/" id="title" class="link">
         {SITE_TITLE}
-      </a>
+      </DealWithA>
     </h1>
     <div class="internal-links">
       <HeaderLink href="/">Home</HeaderLink>

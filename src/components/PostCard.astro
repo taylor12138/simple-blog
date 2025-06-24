@@ -5,6 +5,7 @@ import { GLOBAL_STYLE } from "@/consts";
 import "@/styles/components.scss";
 import "@/styles/global.scss";
 import "p5-react-component/dist/global.less";
+import DealWithA from "./DealWithA.astro";
 
 interface Props {
   slug: string;
@@ -14,12 +15,11 @@ interface Props {
   description?: string;
 }
 
-const baseUrl = import.meta.env.BASE_URL;
 const { slug, heroImage, title, pubDate, description } = Astro.props;
 ---
 
 <Card class="post-card" variant={GLOBAL_STYLE}>
-  <a class="img-container" href={`${baseUrl}blog/${slug}`}>
+  <DealWithA class="img-container" href={`blog/${slug}`}>
     {
       heroImage === undefined ? (
         <Title content={title} client:only="react" />
@@ -27,11 +27,11 @@ const { slug, heroImage, title, pubDate, description } = Astro.props;
         <img src={heroImage} alt={title} loading="lazy" />
       )
     }
-  </a>
+  </DealWithA>
   <h4>
-    <a class="link" href={`/blog/${slug}`}>
+    <DealWithA class="link" href={`/blog/${slug}`}>
       <Font client:only="react">{title}</Font>
-    </a>
+    </DealWithA>
   </h4>
   <Font client:only="react">
     {description}

@@ -1,0 +1,29 @@
+---
+import {type HTMLAttributes} from "astro/types";
+
+interface Props extends HTMLAttributes<'a'> {
+    href?: string;
+    class?: string;
+}
+
+const baseUrl = import.meta.env.BASE_URL;
+const {
+    href,
+  ...props
+} = Astro.props;
+
+// 处理路径
+let useHref = href;
+if(href && href.startsWith('/')) {
+    useHref = `${baseUrl}${href?.slice(1)}`;
+} else if(href && href.startsWith('http')) {
+    useHref = href;
+} else if(href) {
+    useHref = `${baseUrl}${href}`;
+}
+---
+
+<a {...props} href={useHref}>
+  <slot />
+</a>
+

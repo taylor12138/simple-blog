@@ -1,5 +1,6 @@
 ---
 import type {HTMLAttributes} from 'astro/types';
+import DealWithA from './DealWithA.astro';
 import '@/styles/button.scss'
 import {clsx} from "clsx";
 
@@ -12,7 +13,7 @@ const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + subpath?.[0];
 ---
 
-<a
+<DealWithA
     href={href?.toString()}
     target='_self'
     class={clsx(
@@ -23,4 +24,4 @@ const isActive = href === pathname || href === '/' + subpath?.[0];
     {...props}
 >
   <slot/>
-</a>
+</DealWithA>
