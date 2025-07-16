@@ -165,7 +165,7 @@ scene.add(axes)
 
 当然还有不同的helper，比如`CameraHelper`、`DirectionalLightHelper` 等，都是官方的辅助工具，可以在官网中找到对应的helper进行调试
 
-![](/three/axeshelper.png)
+![](/simple-blog/three/axeshelper.png)
 
 
 
@@ -182,7 +182,7 @@ renderer.setAnimationLoop(() => {
 });
 ```
 
-![](/three/fps.png)
+![](/simple-blog/three/fps.png)
 
 
 
@@ -210,7 +210,7 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 
 接下来的两个参数是**近截面**（near）和**远截面**（far）。通俗来讲就是相机能看到的最近的距离和最远的距离。 
 
-![](/three/camera.png)
+![](/simple-blog/three/camera.png)
 
 设置完还得设置相机的位置，参数分别是x、y、z坐标
 
@@ -423,7 +423,7 @@ scene.remove(xx) //将xx移除场景
 
 它继承于[Object3D](https://threejs.org/docs/index.html#api/zh/core/Object3D)，它代表一个局部空间，以下是官网文档对场景解释的一个例子：
 
-![](/three/scene.png)
+![](/simple-blog/three/scene.png)
 
 太阳系、太阳、地球、月亮。
 
@@ -452,7 +452,7 @@ sunMesh.add(earthMesh);
 objects.push(earthMesh);
 ```
 
-![](/three/scene2.png)
+![](/simple-blog/three/scene2.png)
 
 所以我们最好做一个太阳系，再往太阳系里添加地球和太阳
 
@@ -480,7 +480,7 @@ solarSystem.add(earthMesh);
 objects.push(earthMesh);
 ```
 
-![](/three/scene3.png)
+![](/simple-blog/three/scene3.png)
 
 最后再试一试加上地月系
 
@@ -512,7 +512,7 @@ earthOrbit.add(moonMesh);
 objects.push(moonMesh);
 ```
 
-![](/three/scene4.png)
+![](/simple-blog/three/scene4.png)
 
 ###### 区块（Object3D）管理的优点
 
@@ -803,7 +803,7 @@ setEnvMap(hdr) {
 
 我们可以看到效果
 
-![](/three/scene1.png)
+![](/simple-blog/three/scene1.png)
 
 [尝试一下](https://codesandbox.io/s/compassionate-curran-gxbt01?file=/src/script.js)
 
@@ -821,13 +821,13 @@ setEnvMap(hdr) {
 
 但是，虽然我们可以用各种裁剪、缩放的方式，让图片宽高变小，但是这可能导致我们存在GPU的图片太小了，像素颜色可能会变成这样
 
-![](/three/xiangsu.png)
+![](/simple-blog/three/xiangsu.png)
 
 不过，我们可以用mipmaps解决这个问题，要设置filter，
 
 当在绘制的纹理大于其原始尺寸时设置过滤器，我们可以通过设置 `texture.magFilter`（THREE.LinearFilter、NearestFilter）来选择像素的[展示情况](https://threejs.org/manual/#zh/textures)
 
-![](/three/texture.png)
+![](/simple-blog/three/texture.png)
 
 当在绘制的纹理小于其原始尺寸时设置过滤器，你要设置 [`texture.minFilter`](https://threejs.org/docs/#api/zh/textures/Texture#minFilter) 
 
@@ -907,7 +907,7 @@ const mesh = new THREE.Mesh( geometry, material ); scene.add( mesh );
 
 你可以理解他为一个类似pixi的sprite，但是它由一个物体几何（geometry） + 材料（material） 合成的，比如一颗木头就是由一个圆柱体 + 木材质合成的
 
-![](/three/Mesh.png)
+![](/simple-blog/three/Mesh.png)
 
 #### Group
 
@@ -997,9 +997,9 @@ uv坐标可以理解为纹理坐标，像前端精灵图一样，每一块·都�
 
 这里引用**Bruno Simon** 的两张图表现texutre对应的平面坐标（二维uv位置， 在`BufferAttribute`中它的itemSize为2）
 
-![](/three/uv.png)
+![](/simple-blog/three/uv.png)
 
-![](/three/uv2.png)
+![](/simple-blog/three/uv2.png)
 
 设置uv
 
@@ -1034,7 +1034,7 @@ U（图片在显示器水平的坐标）和V（图片在显示器垂直的坐标
 
 normals表示的是法向量，一般和光照、反射、折射有关
 
-![](/three/normals2.png)
+![](/simple-blog/three/normals2.png)
 
 比如在图片里，我们可以看到如果光照按照左上到右下的角度射进来，左上半球是有光照反应的，右下是逐渐变暗的，并且右下角会随之产生阴影，此时我们还能看到左上能形成反射的向量角度,
 
@@ -1046,7 +1046,7 @@ normals表示的是法向量，一般和光照、反射、折射有关
 [0, 1, 0]
 ```
 
-![](/three/normal3.png)
+![](/simple-blog/three/normal3.png)
 
 但是当我们把顶点的法向量调整为
 
@@ -1056,7 +1056,7 @@ normals表示的是法向量，一般和光照、反射、折射有关
 
 此时机会看到和侧面一样的打光情况
 
-![](/three/normal4.png)
+![](/simple-blog/three/normal4.png)
 
 
 
@@ -1070,7 +1070,7 @@ normals表示的是法向量，一般和光照、反射、折射有关
 >
 > https://github.com/mrdoob/three.js/wiki/Migration-Guide#r124--r125
 
-![](/three/no.png)
+![](/simple-blog/three/no.png)
 
 [官网介绍](https://threejs.org/docs/?q=geometry#api/zh/geometries/BoxGeometry)
 
@@ -1084,13 +1084,13 @@ normals表示的是法向量，一般和光照、反射、折射有关
 
 对于碰撞检测，threejs默认使用sphere bouding
 
-![](/three/bounding.png)
+![](/simple-blog/three/bounding.png)
 
 也就是一个球形
 
 其实也就是Geometry的这两个属性
 
-![](/three/bounding2.png)
+![](/simple-blog/three/bounding2.png)
 
 
 
@@ -1108,7 +1108,7 @@ normals表示的是法向量，一般和光照、反射、折射有关
 
 > 实际上，[`BufferGeometry`](https://threejs.org/docs/#api/zh/core/BufferGeometry) 本质上是一系列 [`BufferAttribute`](https://threejs.org/docs/#api/zh/core/BufferAttribute)s 的 *名称* 。每一个 [`BufferAttribute`](https://threejs.org/docs/#api/zh/core/BufferAttribute) 代表一种类型数据的数组：位置，法线，颜色，uv，等等…… 这些合起来， [`BufferAttribute`](https://threejs.org/docs/#api/zh/core/BufferAttribute)s 代表每个顶点所有数据的 *并行数组* 。
 
-![](/three/buffergeometry.png)
+![](/simple-blog/three/buffergeometry.png)
 
 而上面`position`, `normal`, `color`, `uv` ，它们指的是 *并行数组* ，代表每个属性的第N个数据集属于同一个顶点。index=4的顶点被高亮表示贯穿所有属性的平行数据定义一个顶点。
 

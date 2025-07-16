@@ -407,7 +407,7 @@ for (let i = 0; i < 10; i++) {
 
 连接本地的时候，连接地址可以在cmd中输入mongo，然后这里会看得到
 
-![](/MongoDB/address.jpg)
+![](/simple-blog/MongoDB/address.png)
 
 
 

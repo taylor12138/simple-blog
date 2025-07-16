@@ -769,7 +769,7 @@ rules: {
 
 在项目根目录下新建三个文件，文件名分别是 `.env.devlopment`、`.env.production`、`.env.test`
 
-![](/Vue3(下)/env.jpg)
+![](/simple-blog/Vue3(下)/env.jpg)
 
 ```
 // .env.test

@@ -1103,7 +1103,7 @@ a = {
 
 而这篇文章用于加深immutable的原理https://zhuanlan.zhihu.com/p/44571842
 
-![](/JavaScript进阶ES5/immutable.jpg)
+![](/simple-blog/JavaScript进阶ES5/immutable.png)
 
 但是这种为了保持状态的场景比较适用于react的redux（纯函数），如果是vue的话就没必要考虑这么麻烦
 

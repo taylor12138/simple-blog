@@ -40,7 +40,7 @@ next.js是约定式路由直接在pages文件夹下对应的路由页面
 
 比如我要新建一个detail页面（`localhost:3000/detial`）
 
-![](/Nextjs/router.png)
+![](/simple-blog/Nextjs/router.png)
 
 #### 路由跳转
 
@@ -127,7 +127,7 @@ export default function Detial() {
 
 （嵌套多级路由）：新建文件夹，文件夹名为路由名，再新建`index.js`文件
 
-![](/Nextjs/router-more.jpg)
+![](/simple-blog/Nextjs/router-more.png)
 
 - `pages/blog/first-post.js`→`/blog/first-post`
 - `pages/dashboard/settings/username.js`→`/dashboard/settings/username`
@@ -203,7 +203,7 @@ console.log(name, age, work);
 
 此时最好设定与pages页面一一对应的文件命名格式进行获取，比如对于 `detail/[id].js`页面对应的就是 api文件夹下 `detail/[id].js`的api
 
-![](/Nextjs/api.jpg)
+![](/simple-blog/Nextjs/api.png)
 
 ```js
 //api/detail/[id].js

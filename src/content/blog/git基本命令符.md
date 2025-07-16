@@ -65,7 +65,7 @@ Git本地有三个工作区域：
 
 - 再加上远程仓库（Remote Directory）：托管代码的服务器（主要跟我们挂钩的两个区域之一）
 
-![](/git基本命令符/git.jpg)
+![](/simple-blog/git基本命令符/git.png)
 
 #### 忽略文件
 
@@ -115,7 +115,7 @@ git commit -m '描述'
 
 提交规范：
 
-![](/git基本命令符/git2.jpg)
+![](/simple-blog/git基本命令符/git2.jpg)
 
 3 推送到远程
 
@@ -178,7 +178,7 @@ git push -f
 
 此时我们拿到的时候会滚的旧代码，然后我们可以使用vscode自带的工具，拿到我们修改的部分，进行对比修改
 
-![vscode](/git基本命令符/git3.png)
+![vscode](/simple-blog/git基本命令符/git3.png)
 
 回退到上个版本 + 提交：
 

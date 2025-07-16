@@ -11,11 +11,11 @@ description: 'css相关'
 
 在性能监控平台上，发现cls的数据不尽人意，通过lighthouse定位到大致的dom元素位置
 
-![](/从margin谈cls/m1.png)
+![](/simple-blog/从margin谈cls/m1.png)
 
 由于此元素是个container套壳的div，里面包裹的children是懒加载的路有组件，所以我们先使用日常的“外层写定宽高”的形式去解决，设置了一个min-height，但是发现没有什么用
 
-![](/从margin谈cls/m2.png)
+![](/simple-blog/从margin谈cls/m2.png)
 
 通过删除发现children dom使用了 margin-top: 负值的形式向上移动，影响到了父元素 layout
 

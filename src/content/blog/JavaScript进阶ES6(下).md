@@ -556,8 +556,8 @@ console.log(a) // func a
 
 我在网上搜到的部分参考，希望对你们有帮助
 
-![](/JavaScript进阶ES6(下)/guiyi.jpg)
+![](/simple-blog/JavaScript进阶ES6(下)/guiyi.jpg)
 
-![](/JavaScript进阶ES6(下)/guiyi2.jpg)
+![](/simple-blog/JavaScript进阶ES6(下)/guiyi2.jpg)
 
-![](/JavaScript进阶ES6(下)/guiyi3.jpg)
+![](/simple-blog/JavaScript进阶ES6(下)/guiyi3.jpg)

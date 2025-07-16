@@ -426,7 +426,7 @@ github下载地址：https://github.com/amfe/lib-flexible
 
 也被称为网格布局。擅长于将一个页面划分为几个主要区域，以及定义这些区域的大小、位置、层次等关系（前提是HTML生成了这些区域）。类似于以下的效果
 
-![](/移动&Web开发的常见布局(CSS)/grid.jpg)
+![](/simple-blog/移动&Web开发的常见布局(CSS)/grid.jpg)
 
 指定父元素横竖网格的大小（从而规定子元素的大小）
 

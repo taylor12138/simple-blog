@@ -73,7 +73,7 @@ Connection: Upgrade
 
 2.当你获取 Web Socket 连接后，你可以通过 **send()** 方法来向服务器发送数据，并通过 **onmessage** 事件来接收服务器返回的数据。（允许服务端主动向客户端推送数据）
 
-![](/websocket/WebSocket.png)
+![](/simple-blog/websocket/WebSocket.png)
 
 WebSocket推送技术和http2.0的服务端推送（server push）：
 
@@ -193,7 +193,7 @@ let socket = new WebSocket('ws://echo.websocket.org')
 
 然后再浏览器调试可以看到我们发送成功了
 
-![](/websocket/wsocket_send.png)
+![](/simple-blog/websocket/wsocket_send.png)
 
 ```js
 //H5已经提供了websocket的API，可以直接使用
@@ -275,7 +275,7 @@ function broadcast(server, msg) {
 
 说是说框架，但官方也解释了`socket.io`并不是websocket的一个实践，即使他在其中有使用到websocket的传输协议，但它作出了许多拓展，这就是为什么 WebSocket 客户端无法成功连接到 Socket.IO 服务器，而 Socket.IO 客户端也无法连接到普通 WebSocket 服务器的原因。（但在实现功能上，我们可以看成是一致的）
 
-![](/websocket/socket_io.png)
+![](/simple-blog/websocket/socket_io.png)
 
 附上官网 https://socket.io/
 

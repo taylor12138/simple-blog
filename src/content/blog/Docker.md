@@ -122,7 +122,7 @@ Docker 技术使用[ Linux 内核](https://www.redhat.com/zh/topics/linux/what-i
 
 配置
 
-![](/docker/d1.png)
+![](/simple-blog/docker/d1.png)
 
 
 
@@ -141,7 +141,7 @@ docker run --name some-redis -d redis
 
 打开桌面版docker，到对应的redis cli，执行命令
 
-![](/docker/d2.png)
+![](/simple-blog/docker/d2.png)
 
 
 
@@ -546,7 +546,7 @@ docker build -t my-test:v1 .
 
 此时在docker ui界面，即可看到刚才的`my-test`dockerfile镜像
 
-![image-20240313005414499](/docker/d3.png)
+![image-20240313005414499](/simple-blog/docker/d3.png)
 
 
 
@@ -577,7 +577,7 @@ docker run -p 8080:8080 --name test-hello my-test:v0.0.1
 - `volume` 由容器创建和管理，创建在宿主机，所以删除容器不会丢失，官方推荐，更高效，Linux 文件系统，适合存储数据库数据。可挂到多个容器上
 - `tmpfs mount` 适合存储临时文件，存宿主机内存中。不可多容器共享。
 
-![image-20240313095416820](/docker/d4.png)
+![image-20240313095416820](/simple-blog/docker/d4.png)
 
 我们可以通过图片看到，`bind mount`是直接绑定宿主机的文件目录，`volume`是容器来创建宿主机的文件目录，`tmpfs mount` 直接走内存
 
@@ -639,7 +639,7 @@ docker run -d --name redis --network test-net --network-alias redis redis:latest
 
 修改代码中访问`redis`的地址为网络别名
 
-![image-20240527180002522](/docker/redis.png)
+![image-20240527180002522](/simple-blog/docker/redis.png)
 
 运行 Web 项目，使用同个网络
 

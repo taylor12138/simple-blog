@@ -31,11 +31,11 @@ React 实现了一个**虚拟堆栈帧**，在每个element节点都会生成对
 
 但是具体虚拟dom之间和fiber之间的联系结构不一致
 
-![](/ReactFiber/dom.png)
+![](/simple-blog/ReactFiber/dom.png)
 
 
 
-![](/ReactFiber/fibertree.png)
+![](/simple-blog/ReactFiber/fibertree.png)
 
 实际上，这个所谓的虚拟堆栈帧本质上是建立了多个包含节点和指针的链表数据结构。每一个节点就是一个 fiber 基本单元，这个对象存储了一定的组件相关的数据域信息。
 
@@ -231,7 +231,7 @@ beginWork方法部分截图
 
 2. 更新时期，复用之前的current
 
-![](/ReactFiber/tree1.png)
+![](/simple-blog/ReactFiber/tree1.png)
 
 最后通过在react/packages/react-reconciler/src/ReactChildFiber.js 里的 `reconcileChildren` 函数（diff）算法对比更新节点
 
@@ -262,7 +262,7 @@ fiber出现之前的React 处理一次 setState()（首次渲染）时会有两�
 
 当JS执行时间过长，超出了16.6ms（主流浏览器1000ms / 60帧），这次刷新就没有时间执行**样式布局**和**样式绘制**了。由此在同步工作而过程当中，可能绘制成功，可能要等到下一个16.6ms才能绘制出来 (图片源自[React技术揭秘](https://react.iamkasong.com/))
 
-![](/ReactFiber/fault.jpg)
+![](/simple-blog/ReactFiber/fault.png)
 
 然而需要解决
 
@@ -447,9 +447,9 @@ function commitBeforeMutationEffects_begin() {
 
 useEffect回调执行 ->  fiber节点上增加Passive的effect
 
-![](/ReactFiber/effect.jpg)
+![](/simple-blog/ReactFiber/effect.png)
 
-![](/ReactFiber/effect2.jpg)
+![](/simple-blog/ReactFiber/effect2.png)
 
 commit阶段有三个小段：
 
@@ -496,7 +496,7 @@ commit阶段有三个小段：
 
 调用`ReactDOM.render`（此时未进入`ReactDOM`渲染器，是Render阶段），会采用深度优先遍历创建fiber树（也就是虚拟DOM树），并且以深度优先遍历（从父到子，APP -> P1 -> C1 -> C2 -> P2）的形式调用它们的生命周期函数（constructor、render等）
 
-![](/ReactFiber/render1.jpg)
+![](/simple-blog/ReactFiber/render1.png)
 
 进入Commit阶段后，从子节点回退（从子到父,C1-> C2 -> P1 -> P2 -> APP），执行生命周期函数（`ComponentDidMount`、`CoponentDidUpdate`等）
 

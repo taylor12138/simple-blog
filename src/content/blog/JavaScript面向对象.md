@@ -300,7 +300,7 @@ console.log(Star.sex);
 
 构造函数虽然好用，但是存在浪费内存的问题
 
-![](/JavaScript面向对象/gouzao.jpg)
+![](/simple-blog/JavaScript面向对象/gouzao.png)
 
 
 
@@ -426,7 +426,7 @@ myobj.foo = "bar"
 
 而根据查找规则，使用就近原则来处理重复成员定义问题（即先找到，先使用）
 
-![](/JavaScript面向对象/yuanxinglian.jpg)
+![](/simple-blog/JavaScript面向对象/yuanxinglian.png)
 
 **（这里未标出实例对象 constructor 指向 构造函数）**
 

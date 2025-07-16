@@ -53,11 +53,11 @@ SSR劣势
 
    - 代码混杂，难以维护（jsp、php）
 
-     ![](/Nodejs/SSR3.jpg)
+     ![](/simple-blog/Nodejs/SSR3.jpg)
 
 2. 前后端分离时代，SPA模式出现，前端团队接管页面渲染，后端团队仅负责数据查询和API
 
-   ![](/Nodejs/SSR4.jpg)
+   ![](/simple-blog/Nodejs/SSR4.jpg)
 
 3. 随着SPA的发展，弊端也逐渐暴露：JS脚本的臃肿，SEO的退化
 
@@ -69,7 +69,7 @@ SSR劣势
 
    但是！值得一提的是，**浏览器加载并执行 JavaScript 脚本**，（这个是之前服务端渲染不会的做）给页面上的元素绑定事件，让页面变得可交互，当用户与浏览器页面进行交互，如跳转到下一个页面时，浏览器会执行 JavaScript 脚本，向后端服务器请求数据，获取完数据之后再次执行 JavaScript 代码动态渲染页面。
 
-   ![](/Nodejs/SSR5.jpg)
+   ![](/simple-blog/Nodejs/SSR5.jpg)
 
    
 
@@ -90,7 +90,7 @@ SSR劣势
 
 - 将代码生成commonjs格式产物，让前端服务器（node）可以正常加载（随着nodejs对esm的支持成熟程度增加，也在不断变得友好）
 
-  ![](/Nodejs/ssr10.png)
+  ![](/simple-blog/Nodejs/ssr10.png)
 
 - 移除代码样式引入 
 

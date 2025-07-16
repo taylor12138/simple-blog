@@ -671,11 +671,11 @@ isVector2: true
 
 下面的图片分别对应 512、1024、128
 
-![](/three/mapsize512.png)
+![](/simple-blog/three/mapsize512.png)
 
-![](/three/mapsize1024.png)
+![](/simple-blog/three/mapsize1024.png)
 
-![](/three/mapsize128.png)
+![](/simple-blog/three/mapsize128.png)
 
 
 
@@ -721,7 +721,7 @@ directionalLight.shadow.camera.right = -2;
 
 刚好到达范围内是最好的
 
-![](/three/shadow.png)
+![](/simple-blog/three/shadow.png)
 
 并且还可以通过radius控制阴影虚化
 
@@ -1145,23 +1145,23 @@ render() {
 
 一个cube
 
-![](/three/rotate1.png)
+![](/simple-blog/three/rotate1.png)
 
 ```js
 //第一步
 cube.rotation.y = Math.PI / 2;
 ```
 
-![](/three/rotate3.png)
+![](/simple-blog/three/rotate3.png)
 
-![](/three/rotate2.png)
+![](/simple-blog/three/rotate2.png)
 
 ```js
 //第二步
 cube.rotation.x = Math.PI / 2;
 ```
 
-![](/three/rotate4.png)
+![](/simple-blog/three/rotate4.png)
 
 此时的旋转时直接指根据当前标准的坐标轴旋转
 
@@ -1176,7 +1176,7 @@ cube.rotation.y = Math.PI / 2;
 cube.rotation.x = Math.PI / 2;
 ```
 
-![](/three/rotate5.png)
+![](/simple-blog/three/rotate5.png)
 
 
 

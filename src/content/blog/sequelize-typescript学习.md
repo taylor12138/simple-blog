@@ -71,7 +71,7 @@ export default class xxModal extends BaseModel {
 
 ##### ForeignKey
 
-![](/sequelize-typescript学习/1.png)
+![](/simple-blog/sequelize-typescript学习/1.png)
 
 
 
@@ -112,7 +112,7 @@ Team.findOne({ include: [Player] }).then((team) => {
 });
 ```
 
-![](/sequelize-typescript学习/2.png)
+![](/simple-blog/sequelize-typescript学习/2.png)
 
 
 
@@ -152,7 +152,7 @@ class BookAuthor extends Model {
 books: Array<Book & {BookAuthor: BookAuthor}>;
 ```
 
-![](/sequelize-typescript学习/3.png)
+![](/simple-blog/sequelize-typescript学习/3.png)
 
 
 

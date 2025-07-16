@@ -31,7 +31,7 @@ JS动画优点：
 
 ## CSS的repaint和reflow
 
-![](/CSS渲染深究/reflow.jpg)
+![](/simple-blog/CSS渲染深究/reflow.png)
 
 以上为浏览器解析流程图(**WebKit 主流程**)
 
@@ -194,7 +194,7 @@ PaintLayer 最初是用来实现 [stacking contest（层叠上下文）](https:/
 
 我们可以得到一个大概的浏览器线程模型：
 
-![](/CSS渲染深究/css_optimize.png)
+![](/simple-blog/CSS渲染深究/css_optimize.png)
 
 而在什么情况下我们可以单独创建出这样一个复合层(合成层)？
 
@@ -209,7 +209,7 @@ PaintLayer 最初是用来实现 [stacking contest（层叠上下文）](https:/
 
 雀食可以，但是我们可以看到两个额外的重绘操作在动画时间轴的开始和结束
 
-![](/CSS渲染深究/cssoptimize2.png)
+![](/simple-blog/CSS渲染深究/cssoptimize2.png)
 
 3D 和 2D 变换之间的区别在于 3D 变换使浏览器预先创建一个单独的复合层，而 **2D 变换则是即时完成**的。在动画开始时，会创建一个新的复合层并将纹理加载到 GPU，从而启动重绘。然后动画由 GPU 中的合成器执行。当动画完成时，附加的复合层将被移除，这将导致另一个重绘操作。
 
@@ -345,13 +345,13 @@ target.onanimationend = function() {
 
 例子演示http://fouber.github.io/test/layer/
 
-另外一个例子演示：(B被隐式提升为合成层)![](/CSS渲染深究/image-20220619211249005.png)
+另外一个例子演示：(B被隐式提升为合成层)![](/simple-blog/CSS渲染深究/image-20220619211249005.png)
 
-![](/CSS渲染深究/image-20220619212419238.png)
+![](/simple-blog/CSS渲染深究/image-20220619212419238.png)
 
 但是如果调整一下b的位置
 
-![](/CSS渲染深究/image-20220619212458805.png)
+![](/simple-blog/CSS渲染深究/image-20220619212458805.png)
 
 
 
@@ -373,9 +373,9 @@ target.onanimationend = function() {
 
 比如上面的层爆炸例子http://fouber.github.io/test/layer/，它在Chrome 94 Releases 版本被优化了。（我目前时Chrome 96）所以层压缩给得看浏览器版本	
 
-![](/CSS渲染深究/image-20220619202803517.png)
+![](/simple-blog/CSS渲染深究/image-20220619202803517.png)
 
-![](/CSS渲染深究/image-20220619203500002.png)
+![](/simple-blog/CSS渲染深究/image-20220619203500002.png)
 
 当然，浏览器也不是万能的，也有无法进行层压缩的情况，无法进行层压缩的情况：https://fed.taobao.org/blog/taofed/do71ct/performance-composite/
 

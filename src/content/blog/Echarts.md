@@ -184,11 +184,11 @@ Echarts使用一个名为 **zrender** 的渲染引擎来管理渲染元素，并
 
 ## Echarts的SVG VS Canvas
 
-![](/Echarts/vs.jpg)
+![](/simple-blog/Echarts/vs.png)
 
 知乎上的结论大图
 
-![](/Echarts/vs2.jpg)
+![](/simple-blog/Echarts/vs2.png)
 
 绿色表示推荐使用 SVG，红色表示推荐使用 Canvas，↑箭头越多表示推荐程度越强烈
 

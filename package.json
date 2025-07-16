@@ -9,7 +9,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "png": "find public -type f -name \"*.png\" -exec pngquant --quality=65-80 --ext .png --force {} \\;",
-    "jpeg": "find public -type f \\( -name \"*.jpg\" -o -name \"*.jpeg\" \\) -exec sh -c 'jpegtran -copy none -optimize -progressive \"$1\" > \"$1.tmp\" && mv \"$1.tmp\" \"$1\" || rm -f \"$1.tmp\"' sh {} \\;"
+    "jpeg": "find public -type f \\( -name \"*.jpg\" -o -name \"*.jpeg\" \\) -exec sh -c 'jpegtran -copy none -optimize -progressive \"$1\" > \"$1.tmp\" && mv \"$1.tmp\" \"$1\" || rm -f \"$1.tmp\"' sh {} \\;",
+    "fix-extensions": "find public -name \"*.png\" -exec sh -c 'if file \"$1\" | grep -q JPEG; then mv \"$1\" \"${1%.png}.jpg\"; echo \"Fixed: $1 -> ${1%.png}.jpg\"; fi' sh {} \\; && find public \\( -name \"*.jpg\" -o -name \"*.jpeg\" \\) -exec sh -c 'if file \"$1\" | grep -q PNG; then mv \"$1\" \"${1%.*}.png\"; echo \"Fixed: $1 -> ${1%.*}.png\"; fi' sh {} \\;",
+    "fix-image-paths": "find src/content/blog -name \"*.md\" -exec sed -i '' 's|](/|](/simple-blog/|g' {} \\;",
+    "compress": "npm run fix-extensions && npm run png && npm run jpeg"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

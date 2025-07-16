@@ -78,7 +78,7 @@ redux是一个专门做状态管理的JS库（集中式管理）
 
 （实际上有点像Vuex，Vue人家就很少用这个，用自己内部的Vuex）
 
-![](/React(中)/redux.jpg)
+![](/simple-blog/React(中)/redux.png)
 
 以上为redux原理图
 
@@ -539,7 +539,7 @@ facebook为了让开发人员更加舒服使用redux，开发了react-redux
 
 （其实我个人觉得可以理解为，react让组件和redux之间的交互多了一个中间人（套了个外壳）：container，使得我们以后都不需要关心订阅和取消订阅的问题）
 
-![](/React(中)/react-redux.png)
+![](/simple-blog/React(中)/react-redux.png)
 
 可以看得出外面要了一层容器，防止UI组件直接对接redux
 

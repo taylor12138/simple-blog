@@ -36,7 +36,7 @@ offsetWidth等属性是只读属性，只能获取不能赋值                st
 
 一张图解offset
 
-![](/PC&移动端网页特效(JS)/offset.jpg)
+![](/simple-blog/PC&移动端网页特效(JS)/offset.png)
 
 
 
@@ -107,7 +107,7 @@ father.addEventListener('scroll', () => {
 
 `var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;`)
 
-![](/PC&移动端网页特效(JS)/scroll.jpg)
+![](/simple-blog/PC&移动端网页特效(JS)/scroll.png)
 
 滚动条在滚动时发生的事件：onscroll事件
 
@@ -187,7 +187,7 @@ scroll常用于获取滚动距离  `element.scrollTop`    `element.scrollLeft`  
 
 
 
-![](/PC&移动端网页特效(JS)/getbund.jpg)
+![](/simple-blog/PC&移动端网页特效(JS)/getbund.png)
 
 #### 方法四 IntersectionObserver API
 
@@ -602,7 +602,7 @@ window.ondevicemotion = function(event){
 
 x，y，z表示三个方向的重力加速度
 
-![](/PC&移动端网页特效(JS)/shake.jpg)
+![](/simple-blog/PC&移动端网页特效(JS)/shake.png)
 
 
 

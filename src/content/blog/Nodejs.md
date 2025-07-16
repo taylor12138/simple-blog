@@ -378,7 +378,7 @@ rs.pipe(ws);
 - 使用场景：用于清理临时文件
 - 特点：永久删除文件，不可恢复
 
-![](/Nodejs/readdir.png)
+![](/simple-blog/Nodejs/readdir.png)
 
 ```js
 const fs = require('fs');

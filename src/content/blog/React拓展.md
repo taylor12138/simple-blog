@@ -34,11 +34,11 @@ dva 首先是一个基于 [redux](https://github.com/reduxjs/redux) 和 [redux-s
 
 数据流图
 
-![](/React扩展/dvajs.jpg)
+![](/simple-blog/React扩展/dvajs.jpg)
 
 （不过现在好像不更新了）
 
-![](/React扩展/dva2.png)
+![](/simple-blog/React扩展/dva2.png)
 
 
 
@@ -48,7 +48,7 @@ dva 首先是一个基于 [redux](https://github.com/reduxjs/redux) 和 [redux-s
 
 是一个可插拔的react应用框架(集成多个大多数都所需的依赖！)，它以路由为基础，支持类next.js的约定式路由，以及各种进阶的路由功能，并以此进行功能拓展，比如支持路由级的按需加载。umi在约定是路由的功能会更像nuxt.js一点
 
-![](/React扩展/umi.jpg)
+![](/simple-blog/React扩展/umi.jpg)
 
 let us use:
 
@@ -58,7 +58,7 @@ npx @umijs/create-umi-app
 npm i
 ```
 
-![](/React扩展/umidir.jpg)
+![](/simple-blog/React扩展/umidir.jpg)
 
 mock：放假数据测试用
 
@@ -68,11 +68,11 @@ src：
 - page文件夹，放我们的功能页面，再不配置路由的情况下（注释掉.umiorc.ts中routes选项），在该文件夹下直接新建xx.tsx文件，将自动成为路由，`index.tsx`文件为首页（对应 `"/"` 路由），`404.tsx`为找不到跳转的页面
   - 嵌套路由则新建文件夹（文件夹名为一级路由名），底下的 `_layout.tsx` 为一级路由组件页面，并且在里面放置 `props.children`用于作为二级路由的插槽位置 ，新建 `nowplay.tsx`，则 nowplay为二级路由名
 
-![](/React扩展/route.jpg)
+![](/simple-blog/React扩展/route.jpg)
 
 #### 它的声明式导航
 
-![](/React扩展/route2.jpg)
+![](/simple-blog/React扩展/route2.jpg)
 
 ```tsx
 // layouts/index.tsx

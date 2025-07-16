@@ -30,7 +30,7 @@ noscript标签：当浏览器禁用JavaScript，或者对脚本的支持关闭�
 <script defer src="xxxx"> </script>
 ```
 
-![](/红宝书啃读note/defer.jpg)
+![](/simple-blog/红宝书啃读note/defer.jpg)
 
 
 

@@ -108,9 +108,9 @@ PaaS（Platform as a Service）是构建在 IaaS 之上的一种平台服务，�
 
 Serverless 则可以理解为运行在 FaaS 中，使用了 BaaS 的函数。
 
-![](/Serverless/bff.png)
+![](/simple-blog/Serverless/bff.png)
 
-![](/Serverless/bff2.png)
+![](/simple-blog/Serverless/bff2.png)
 
 
 
@@ -151,7 +151,7 @@ Serverless 则可以理解为运行在 FaaS 中，使用了 BaaS 的函数。
 
 
 
-![](/Serverless/paas.png)
+![](/simple-blog/Serverless/paas.png)
 
 
 

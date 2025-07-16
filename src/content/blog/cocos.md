@@ -32,7 +32,7 @@ Cocos Creator：是一个位于Cocos2d-x之上的**GUI编辑器**。Cocos Creato
 
 Creator 3.0 统一了 2D 与 3D 的开发工作流，进一步优化了性能，完善了品质
 
-特性：![](/js游戏框架合集/cococreator.png)
+特性：![](/simple-blog/js游戏框架合集/cococreator.png)
 
 #### Cocos2d-x
 
@@ -40,7 +40,7 @@ Cocos2d-x：是cocos的游戏引擎。它支持c ++，JavaScript和Lua。2D 和 
 
 **希望将旧的 Cocos2d-JS 游戏直接运行到 Cocos Creator 上**：由于两者的 API 并不是100%兼容，所以这点是做不到的。
 
-特性：![](/js游戏框架合集/cocos3.jpg)
+特性：![](/simple-blog/js游戏框架合集/cocos3.jpg)
 
 ## Cocos Creator
 
@@ -52,7 +52,7 @@ Cocos2d-x：是cocos的游戏引擎。它支持c ++，JavaScript和Lua。2D 和 
 
 然后我们可以在社区下载一些看起来很酷的项目(需要注意他对应的creator编辑器 版本)
 
-![](/js游戏框架合集/cocos1.png)
+![](/simple-blog/js游戏框架合集/cocos1.png)
 
 然后打开项目后进行 [预览和调试](https://docs.cocos.com/creator/manual/zh/editor/preview/) 进行查看
 
@@ -63,7 +63,7 @@ Cocos2d-x：是cocos的游戏引擎。它支持c ++，JavaScript和Lua。2D 和 
 
 整体上看和我们正常开发web 3d很像，比如创建场景，创建cube啊，只是这些从写代码转移到了gui界面
 
-![](/js游戏框架合集/cocos2.png)
+![](/simple-blog/js游戏框架合集/cocos2.png)
 
 左上角负责gui部分，快速添加 / 删除 mesh
 
@@ -79,7 +79,7 @@ Cocos Creator 内置了通用的动画系统用以实现基于关键帧的动画
 
 [动画系统](https://docs.cocos.com/creator/manual/zh/animation/)
 
-![](/js游戏框架合集/cocos4.png)
+![](/simple-blog/js游戏框架合集/cocos4.png)
 
 然后在对应的节点脚本上，导入 + 使用对应的动画
 
@@ -119,7 +119,7 @@ if (this.BodyAnim) {
 
 像这样创建一个prefab文件，将将预制件资源从 **资源管理器** 拖拽到 **层级管理器** ，然后再从prefab文件夹中拖动到场景即可
 
-![](/js游戏框架合集/cocos5.jpg)
+![](/simple-blog/js游戏框架合集/cocos5.jpg)
 
 或者像这样，通过ui组件内引用，进行适配
 
@@ -177,7 +177,7 @@ export class play_ui extends Component {
 }
 ```
 
-![](/js游戏框架合集/prefab1.png)
+![](/simple-blog/js游戏框架合集/prefab1.png)
 
 #### meta文件
 
@@ -189,43 +189,43 @@ Cocos Creator 会为 assets 目录下的每一个文件和目录生成一个同�
 
 先将设计宽高改为竖屏
 
-![image-20240909001703052](/js游戏框架合集/setting.png)
+![image-20240909001703052](/simple-blog/js游戏框架合集/setting.png)
 
 #### 给当前组件添加帧动画
 
-![image-20240916231451467](/js游戏框架合集/frame.png)
+![image-20240916231451467](/simple-blog/js游戏框架合集/frame.png)
 
 新建动画剪辑资源，然后在assets文件夹下我们可以新建一个animations文件夹，专门用来放置动画组件
 
 然后在属性栏中添加你想要的动画（帧动画，位移等）
 
-![image-20240916233930161](/js游戏框架合集/frame2.png)
+![image-20240916233930161](/simple-blog/js游戏框架合集/frame2.png)
 
-![image-20240916233930161](/js游戏框架合集/frame3.png)
+![image-20240916233930161](/simple-blog/js游戏框架合集/frame3.png)
 
 与此同时，如果想播放循环动画，可以在左下角“循环模式”上设置为“循环播放“
 
 如果想要制造消失的效果，可以在最后一帧加一张空帧
 
-![image-20240916233930161](/js游戏框架合集/cocos6.png)
+![image-20240916233930161](/simple-blog/js游戏框架合集/cocos6.png)
 
 #### 创建ui组件
 
 在这还能随时随地创建ui组件
 
-![image-20240917000613149](/js游戏框架合集/button.png)
+![image-20240917000613149](/simple-blog/js游戏框架合集/button.png)
 
 #### 创建脚本
 
 我们需要给我们的组件赋值上点击事件
 
-![image-20240917003932599](/js游戏框架合集/start-script.png)
+![image-20240917003932599](/simple-blog/js游戏框架合集/start-script.png)
 
 然后把新建的脚本，拖拽到canvas 或 对应的事件组件上
 
 此时为button ui 组件添加事件即可
 
-![image-20240917005016996](/js游戏框架合集/button2.png)
+![image-20240917005016996](/simple-blog/js游戏框架合集/button2.png)
 
 双击创建好的脚本，可以直接打开vscode进行编辑
 
@@ -302,7 +302,7 @@ export class background_ui extends Component {
 
 此时将左上角层级管理器的ui 拖拽到 右边属性检查器定义好的的bg01 、 bg02中去
 
-![image-20240917012322586](/js游戏框架合集/node.png)
+![image-20240917012322586](/simple-blog/js游戏框架合集/node.png)
 
 #### 创建按键监听脚本
 
@@ -310,7 +310,7 @@ export class background_ui extends Component {
 
 然后通过拖动挂载到对应的组件当中
 
-![image-20250205221806419](/js游戏框架合集/cocoslisten.png)
+![image-20250205221806419](/simple-blog/js游戏框架合集/cocoslisten.png)
 
 然后设置对应方法
 
@@ -395,7 +395,7 @@ export class enemy_ui extends Component {
 
 然后进行拖拽导入，此时就可以在组件内进行逻辑控制播放
 
-![image-20250205221806419](/js游戏框架合集/cocos7.png)
+![image-20250205221806419](/simple-blog/js游戏框架合集/cocos7.png)
 
 ## 注意事项
 

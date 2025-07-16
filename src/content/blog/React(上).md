@@ -875,7 +875,7 @@ class Life extends React.Component {
 
 **旧版React生命周期图**
 
-![](/React(上)/react_life.png)
+![](/simple-blog/React(上)/react_life.png)
 
 我们可以看到（由`ReactDOM.render()`触发）**初始化阶段**：
 
@@ -908,7 +908,7 @@ class Life extends React.Component {
 
 #### **新生命周期图**
 
-![](/React(上)/react_lift2.jpg)
+![](/simple-blog/React(上)/react_lift2.png)
 
 改动一：
 
@@ -918,7 +918,7 @@ class Life extends React.Component {
 
 它提示你新版本已经开始使用 `UNSAFE_componentWillMount`、 `UNSAFE_componentWillUpdate`，并且提示你可能在18.0版本以后就不能使用旧版本的以上的生命周期函数了
 
-![](/React(上)/react_warn.png)
+![](/simple-blog/React(上)/react_warn.png)
 
 然而为什么这三个生命周期要发生改动？React官方解释道：
 
@@ -1255,7 +1255,7 @@ proxy内部选项介绍：
 
   遇到这个前缀的请求就会触发该代理配置，比如猫眼电影的请求示例
 
-  原本请求地址 ：https://i.maoyan.com/ajax/comingList?ci=91&limit=10.... -> 此时我们需要改成  [/ajax/comingList?ci=91&limit=10](/ajax/comingList?ci=91&limit=10)....，就会触发代理
+  原本请求地址 ：https://i.maoyan.com/ajax/comingList?ci=91&limit=10.... -> 此时我们需要改成  [/ajax/comingList?ci=91&limit=10](/simple-blog/ajax/comingList?ci=91&limit=10)....，就会触发代理
 
   ```js
   axios.get('/ajax/mostExpected?limit=10&offset=0&token=&optimus.........').then((res) => { 

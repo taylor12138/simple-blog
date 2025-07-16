@@ -38,7 +38,7 @@ description: '基本常识相关'
 
 
 
-![](/Monorepo/m1.png)
+![](/simple-blog/Monorepo/m1.png)
 
 
 

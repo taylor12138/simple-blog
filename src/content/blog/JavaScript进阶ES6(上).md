@@ -696,7 +696,7 @@ let obj = {
 
 回调地狱：callback hell，异步里面套着另一个异步
 
-![](/JavaScript进阶ES6(上)/callback%20hell.jpg)
+![](/simple-blog/JavaScript进阶ES6(上)/callback%20hell.jpg)
 
 无法保证异步任务执行顺序：
 
@@ -766,7 +766,7 @@ console.log("end");
 创建一个promise容器 => 而这里容器一旦创建，就开始执行里面的代码 => 容器中存放一个异步任务
 默认pending状态，表示正准备去做，即将发生的
 
-![](/JavaScript进阶ES6(上)/promise.jpg)
+![](/simple-blog/JavaScript进阶ES6(上)/promise.png)
 
 **个人觉得：resolve和reject类似于两个callback，然后再外面进行回调罢了**
 finally()方法用于指定不管Promise对象最后状态如何（无论结果是fulfilled或者是rejected），都会执行的操作，该方法时ES2018引入的标准

@@ -42,7 +42,7 @@ background: url()no-repeat	-182px 0;		//分别对应x轴，y轴,基本都是负�
   
   - mobify最新的测试数据：DataURI要比简单的外链资源要慢6倍。
   
-    ![](/CSS高级/image-20220619235353118.png)
+    ![](/simple-blog/CSS高级/image-20220619235353118.png)
   
 - 压缩图片可以使用统一的压缩工具 — `imagemin`，里面提供图片压缩、渐进式图片转换
   
@@ -286,9 +286,9 @@ element::after{
 - 双冒号是在当前规范中引入的，用于区分伪类和伪元素。不过浏览器需要同时支持旧的已经存在的伪元素写法，比如:first-line、:first-letter、:before、:after等，而新的在CSS3中引入的伪元素则不允许再支持旧的单冒号的写法;
 - 所以我们最好养成习惯，伪元素写 `::` 伪类写 `:`
 
-![](/CSS高级/weiyuansu.jpg)
+![](/simple-blog/CSS高级/weiyuansu.png)
 
-![](/CSS高级/weilei.jpg)
+![](/simple-blog/CSS高级/weilei.png)
 
 
 

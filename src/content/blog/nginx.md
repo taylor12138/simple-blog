@@ -23,7 +23,7 @@ brew install nginx
 brew info nginx
 ```
 
-![](/nginx/n1.png)
+![](/simple-blog/nginx/n1.png)
 
 可查看配置信息
 
@@ -73,7 +73,7 @@ nginx -s stop #:先查出nginx进程id再使用kill命令强制杀掉进程。
 
 此刻我们可以看到
 
-![](/nginx/n2.png)
+![](/simple-blog/nginx/n2.png)
 
 
 
@@ -81,7 +81,7 @@ nginx -s stop #:先查出nginx进程id再使用kill命令强制杀掉进程。
 
 终端输入ps -ef|grep nginx获取到nginx的进程号, 注意是找到“nginx:master”的那个进程号
 
-![](/nginx/n3.png)
+![](/simple-blog/nginx/n3.png)
 
 这里的进程号为34653
 

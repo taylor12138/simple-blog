@@ -28,7 +28,7 @@ w2 start
 
 然后就可以看见
 
-![](/whistle/w1.png)
+![](/simple-blog/whistle/w1.png)
 
 
 
@@ -42,19 +42,19 @@ w2 start
 
 安装完成后，我们对其进行代理配置：
 
-![](/whistle/w2.png)
+![](/simple-blog/whistle/w2.png)
 
-![](/whistle/w3.png)
+![](/simple-blog/whistle/w3.png)
 
-![](/whistle/w4.png)
+![](/simple-blog/whistle/w4.png)
 
 以上就配置完了，在开启whistle后，，对于浏览器先打开auto switch，
 
-![](/whistle/w5.png)
+![](/simple-blog/whistle/w5.png)
 
 然后再打开http://127.0.0.1:8899/#network就可以看到包信息了
 
-![](/whistle/w6.png)
+![](/simple-blog/whistle/w6.png)
 
 
 
@@ -72,17 +72,17 @@ w2 start
 
 然后点击响应详情的 `Inspectors` -> `response` -> `+key` ->  取个名字，将响应信息保存到本地
 
-![](/whistle/w7.png)
+![](/simple-blog/whistle/w7.png)
 
 然后，在左侧边栏的「Values」菜单中，就可以看到我们保存的响应结果
 
 这是一个编辑页面，编辑完后我们可以用control + s 保存
 
-![](/whistle/w8.png)
+![](/simple-blog/whistle/w8.png)
 
 当然，我们最好把他换成json格式
 
-![](/whistle/w9.png)
+![](/simple-blog/whistle/w9.png)
 
 
 
@@ -98,7 +98,7 @@ https://域名/api/moyi/activity/creative/painting file://`{mockname.json}`
 https://域名/api/moyi/activity/creative/painting file://`{mockname.json}` resCors://enable
 ```
 
-![](/whistle/w10.png)
+![](/simple-blog/whistle/w10.png)
 
 
 
@@ -131,7 +131,7 @@ http://www.test.com/xxx operatorURI
 
 - 灵活匹配
 
-![](/whistle/w11.png)
+![](/simple-blog/whistle/w11.png)
 
 除了保留hosts文件单一的语法规则来支持域名匹配外，whistle还提供给开发者更加灵活强大的端口映射(即支持ip带端口)、CNAME、路径匹配、精确匹配、正则表达式、组合等host匹配模式。语法规则的一般描述如下：
 
@@ -183,7 +183,7 @@ host pattern1 pattern2 patternN
 
 2.给手机装好根证书，好抓https的包
 
-![](/whistle/w12.png)
+![](/simple-blog/whistle/w12.png)
 
 3.在Rules规则页下进行替换
 
@@ -204,7 +204,7 @@ https://m.moyi.163.com/newyear20230117/half/index.html redirect://`http://本地
 
 比如，我感觉这个包的js代码有问题，现在想要替换掉
 
-![](/whistle/w13.png)
+![](/simple-blog/whistle/w13.png)
 
 我们直接把原始脚本下载下来，修改它。然后添加以下规则：
 

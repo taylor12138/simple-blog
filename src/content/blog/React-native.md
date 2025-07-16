@@ -108,7 +108,7 @@ adb connect 127.0.0.1:62001
 
 - 踩坑之路：连接后运行 `npx react-native run-android`，给我报了No connected devices的错误，，而且我在连接adb的时候出现这种情况
 
-![](/React-native/moni_err.png)
+![](/simple-blog/React-native/moni_err.png)
 
 这种情况下说明你的模拟器的adb版本太低，被杀死了(无语，研究了好久这个问题)
 
@@ -120,7 +120,7 @@ adb connect 127.0.0.1:62001
 
 2. 一般的手机在 设置 中可以直接找到 开发者选项 进行开启, 如果 找不到 , 就自行百度查一下
 
-   ![](/React-native/kaifazhe.png)
+   ![](/simple-blog/React-native/kaifazhe.png)
 
 3. 手机连接电脑成功后运行检测命令  `adb devices` , 如果有输出设备列表与  ID 相关的字符串就证明
    手机和电脑是连接成功了，如果没有显示设备号，则说明连接有问题，一定要保证手机和电脑是正常连接状态
@@ -160,7 +160,7 @@ npx react-native run-android
 
 运行成功
 
-![](/React-native/React-native.jpg)
+![](/simple-blog/React-native/react-native.png)
 
 
 

@@ -44,9 +44,9 @@ code ./helloworld
 
 注意⚠️，一来的vscode引擎要和当前你使用的vscode相互匹配～
 
-![](/vscode插件/9.png)
+![](/simple-blog/vscode插件/9.png)
 
-![](/vscode插件/10.png)
+![](/simple-blog/vscode插件/10.png)
 
 
 
@@ -263,7 +263,7 @@ result.forEach(function (item, index) {
 return files;
 ```
 
-![](/vscode插件/4.png)
+![](/simple-blog/vscode插件/4.png)
 
 通过 `vscode.Uri.file` 得到文件路径下的解析结果
 
@@ -479,7 +479,7 @@ function getWebviewContent() {
 
 在命令面板中输入**Developer: Toggle Developer Tools**能帮助你调试webview。运行命令之后会为当前可见的webview加载一个devtool
 
-![](/vscode插件/5.png)
+![](/simple-blog/vscode插件/5.png)
 
 
 
@@ -541,11 +541,11 @@ function getWebviewContent() {
 
 如果直接获取全局配置的话会夹杂很多其他自带东西，但是也能拿到数据，所以看个人习惯吧（官网我看案例都是用别名的）
 
-![](/vscode插件/1.png)
+![](/simple-blog/vscode插件/1.png)
 
-![](/vscode插件/2.png)
+![](/simple-blog/vscode插件/2.png)
 
-![](/vscode插件/3.png)
+![](/simple-blog/vscode插件/3.png)
 
 然后再链式调用获取我们的所需配置项数值
 
@@ -651,9 +651,9 @@ npm install -g @vscode/vsce
 
    ##### pnpm问题
 
-   ![image-20240130211944711](/vscode插件/7.png)
+   ![image-20240130211944711](/simple-blog/vscode插件/7.png)
 
-   ![image-20240130205635276](/vscode插件/6.png)
+   ![image-20240130205635276](/simple-blog/vscode插件/6.png)
 
 [解决方案](https://github.com/microsoft/vscode-vsce/issues/421)
 

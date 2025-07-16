@@ -119,7 +119,7 @@ Vue2的diff流程：
 
 双端 diff
 
-![](/Vue3(上)/diff1.png)
+![](/simple-blog/Vue3(上)/diff1.png)
 
 - 头和尾的指针向中间移动，直到 oldStartIdx <= oldEndIdx 并且 newStartIdx <= newEndIdx，说明就处理完了全部的节点。
 

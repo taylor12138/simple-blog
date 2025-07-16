@@ -12,7 +12,7 @@ description: 'WebGL相关'
 
 兼容性：（截止2023年6月）
 
-![](/webgl/Snipaste_2023-06-12_00-05-01.png)
+![](/simple-blog/webgl/Snipaste_2023-06-12_00-05-01.png)
 
 
 
@@ -107,7 +107,7 @@ const FSHADER_SOURCE = `
 
 ```
 
-![image-20240801160713126](/webgl/uv50.png)
+![image-20240801160713126](/simple-blog/webgl/uv50.png)
 
 
 

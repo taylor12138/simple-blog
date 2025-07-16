@@ -54,7 +54,7 @@ vue add eslint
 
 然后会出现选项：
 
-![](/Vue(中)/vue_cli2.png)
+![](/simple-blog/Vue(中)/vue_cli2.png)
 
 然后得到一个文件，可以查看 `package.json` 文件里的 script，得知相应的运行命令；下面对存放在里面的每个文件进行介绍
 
@@ -99,7 +99,7 @@ new Vue({
 
 翻译成虚拟DOM（`virtual DOM`） -> 渲染成UI（真实DOM）
 
-![](/Vue(中)/runtime.png)
+![](/simple-blog/Vue(中)/runtime.png)
 
 所以实际上compiler是处理 `template`部分和 `ast`部分
 
@@ -130,7 +130,7 @@ render: funciton(createElement) {
 - placing config配置的存放：config files 独立存放；package.json 放在package.json中
 - save prest：是否保存刚才配置好的预设 （如果想删除，则要找到`.vuerc`文件，进入后进行修改删除）
 
-![](/Vue(中)/vuecli3.png)
+![](/simple-blog/Vue(中)/vuecli3.png)
 
 CLI 3 的配置去哪里了？ 
 
@@ -262,7 +262,7 @@ npm run serve
 - 输入url 去静态服务器（前端服务器）里获取 html + css + js
 - 浏览器执行JS代码 -> JS代码中有API请求，去到API接口服务器（后端服务器）中获取数据
 
-![](/Vue(中)/QdXr.png)
+![](/simple-blog/Vue(中)/QdXr.png)
 
 随着Ajax的出现，有了前后端分离的开发模式，前后端分离最大的优点就是责任清晰，分工明确，并且在移动端（IOS/Android）出现后，后端使用之前一套API即可
 
@@ -1082,7 +1082,7 @@ new Vue({
 })
 ```
 
-![](/Vue(中)/vuex.png)
+![](/simple-blog/Vue(中)/vuex.png)
 
 ​                                                                                                       **Vuex状态管理图**
 

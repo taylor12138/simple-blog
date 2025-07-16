@@ -83,9 +83,9 @@ chrome.runtime.onInstalled.addListener(() => {
 
 此时我们在chrome拓展页面重新加载插件，然后还可以查看后台日志（查看`console.log`的信息）
 
-![](/Chrome插件小指南/image-20220528134748421.png)
+![](/simple-blog/Chrome插件小指南/image-20220528134748421.png)
 
-![](/Chrome插件小指南/image-20220528134735675.png)
+![](/simple-blog/Chrome插件小指南/image-20220528134735675.png)
 
 
 
@@ -157,7 +157,7 @@ button.current {
 
 此时插件的弹窗就会显示html内容（我通过了js文件修改了button的颜色）
 
-![](/Chrome插件小指南/image-20220528144056205.png)
+![](/simple-blog/Chrome插件小指南/image-20220528144056205.png)
 
 
 
@@ -221,7 +221,7 @@ button.current {
 
 重新加载插件
 
-效果展示：![](/Chrome插件小指南/image-20220528144952456.png)
+效果展示：![](/simple-blog/Chrome插件小指南/image-20220528144952456.png)
 
 
 
@@ -266,7 +266,7 @@ function setPageBackgroundColor() {
 
 点击绿色button控件就可以看到：
 
-![](/Chrome插件小指南/image-20220528161547619.png)
+![](/simple-blog/Chrome插件小指南/image-20220528161547619.png)
 
 > 注意：扩展程序不能在“chrome://extensions”等内部 Chrome 页面上注入内容脚本。请务必在https://google.com等真实网页上试用该扩展程序。
 
@@ -363,9 +363,9 @@ constructOptions(presetButtonColors);
 
 此时重新加载chrome插件，即可在插件位置的拓展选项中找到options，点击进入，然后进入选项页面
 
-![](/Chrome插件小指南/image-20220528164136557.png)
+![](/simple-blog/Chrome插件小指南/image-20220528164136557.png)
 
-![](/Chrome插件小指南/image-20220528164222096.png)
+![](/simple-blog/Chrome插件小指南/image-20220528164222096.png)
 
 
 
@@ -406,7 +406,7 @@ constructOptions(presetButtonColors);
 
 2023年1月份不再更新v2版本
 
-![](/Chrome插件小指南/image-20220529130318926.png)
+![](/simple-blog/Chrome插件小指南/image-20220529130318926.png)
 
 
 

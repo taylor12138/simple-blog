@@ -234,13 +234,13 @@ npm config list
 
 然后就会出现（buffer2依赖 `base64-js1.0.3`，buffer依赖  `base64-js@1.0.2` ）
 
-![](/NPM小解/npm1.jpg)
+![](/simple-blog/NPM小解/npm1.png)
 
 假如没有依赖了 `base64-js@1.0.1`，出现两种情况
 
-![](/NPM小解/npm2.jpg)
+![](/simple-blog/NPM小解/npm2.png)
 
- ![](/NPM小解/npm3.jpg)
+ ![](/simple-blog/NPM小解/npm3.png)
 
 也就是说，如果依赖不同版本，有可能导致依赖结构的不确定性，而这种不确定性可能会给程序带来不可预知的问题。
 
@@ -457,7 +457,7 @@ npm install -g pnpm
 
 2. 极其简洁的node_modules目录（非扁平的 node_modules）
 
-   ![](/NPM小解/pnpm.png)
+   ![](/simple-blog/NPM小解/pnpm.png)
 
 3. 能极大的降低磁盘空间的占用：使用 npm 时，依赖每次被不同的项目使用，都会重复安装一次。  而在使用 pnpm 时，依赖会被存储在内容可寻址的存储中，所以：
 
@@ -470,7 +470,7 @@ npm install -g pnpm
 
 5. 安全性高，项目无法非法访问未声明的依赖（比如项目A依赖B包，B包依赖C包，此时是项目A无法使用C包）
 
-   - ![](/NPM小解/pnpm2.png)
+   - ![](/simple-blog/NPM小解/pnpm2.png)
 
 
 
@@ -579,7 +579,7 @@ npm publish
 
 并且确保package.json不能为 `type:module` (则以.js结尾或没有任何扩展名的文件将作为ES模块进行加载。默认是走`type: commonjs`)
 
-![](/NPM小解/module.png)
+![](/simple-blog/NPM小解/module.png)
 
 
 

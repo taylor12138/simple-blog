@@ -341,7 +341,7 @@ if (locationArg) {
 
 2. 路由组件之间高度不相等，可能会出现转场时留白的情况
 
-   ![white](/React的一些工具/white.png)
+   ![white](/simple-blog/React的一些工具/white.png)
 
 
 

@@ -92,7 +92,7 @@ ctx.arc(x, y, 30, 0, Math.PI); //画一个半圆
 | *y2* | 第二条切线上一点的纵坐标。 |
 | *r*  | 弧的半径。         |
 
-![](/Canvas/canvas4.png)
+![](/simple-blog/Canvas/canvas4.png)
 
 ##### **变换**
 
@@ -372,9 +372,9 @@ context.fillText("我是清晰的文字", 50, 50);
 
 - **`Canvas.closePath()`** 是 Canvas 2D API 将笔点返回到当前子路径起始点的方法。它尝试从当前点到起始点绘制一条直线。如果图形已经是封闭的或者只有一个点，那么此方法不会做任何操作。
   
-  ![](/Canvas/canvas1.png)
+  ![](/simple-blog/Canvas/canvas1.png)
 
-![](/Canvas/canvas2.png)
+![](/simple-blog/Canvas/canvas2.png)
 
 #### 其他小案例
 
@@ -504,7 +504,7 @@ ctx.save(); // Canvas 2D API 通过将当前状态放入栈中，保存 canvas �
 ctx.restore(); //回到save之前的状态
 ```
 
-![](/Canvas/canvas3.png)
+![](/simple-blog/Canvas/canvas3.png)
 
 可以看一下这里的mdn例子加深下理解：https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/save
 
@@ -641,7 +641,7 @@ app.loader
 });
 ```
 
-![](/Canvas/loader.png)
+![](/simple-blog/Canvas/loader.png)
 
 关于loader还有一些监听事件
 
@@ -701,7 +701,7 @@ sprite.destroy()
 sprite.destroy({texture: true, baseTexture: true});
 ```
 
-![](/Canvas/destroy.png)
+![](/simple-blog/Canvas/destroy.png)
 
 移除**TextureCache**、**BaseTextureCache** 纹理，并且会从stage消失
 
@@ -852,7 +852,7 @@ document.body.appendChild(app.view);
 
 实际上这里的app.view就是app.renderer.view，打印出来是一个canvas
 
-![](/Canvas/pixijs.png)
+![](/simple-blog/Canvas/pixijs.png)
 
 #### 7.渲染器Renderer
 
@@ -887,7 +887,7 @@ console.log(app.renderer.type);
 app.renderer.backgroundColor = 0x061639;
 ```
 
-![](/Canvas/blue.png)
+![](/simple-blog/Canvas/blue.png)
 
 要更改画布的大小，请使用`renderer`的`resize`方法，并提供任何新的`width`和`height`值。但是，为了确保画布的大小调整到与分辨率匹配，请将`autoResize`设置为`true`。
 
@@ -904,7 +904,7 @@ app.renderer.resize(512, 512);
 
 他还会默认帮我们把autoStart干成true
 
-![](/Canvas/autostart.png)
+![](/simple-blog/Canvas/autostart.png)
 
 ```js
 // 自定义ticker
@@ -1085,17 +1085,17 @@ PIXI.Assets.load('https://pixijs.com/assets/flowerTop.png').then((texture) =>
 
 首先下载 -> 拖动所需图片文件至texure packer，他将会自动生成
 
-![](/Canvas/texture.png)
+![](/simple-blog/Canvas/texture.png)
 
 制作动画：
 
 复选右边的图片，然后点击预览动画就可以看到图片连续起来的动画效果
 
-![](/Canvas/anima.png)
+![](/simple-blog/Canvas/anima.png)
 
 然后点击发布精灵表
 
-![](/Canvas/publish.png)
+![](/simple-blog/Canvas/publish.png)
 
 就会对应生成一个json文件（记录每个图像名字、大小、位置）和一个png文件（雪碧图）
 
@@ -1188,7 +1188,7 @@ const animatedSprite = new AnimatedSprite(textureArray);
 
 当然，你也可以选择在图片合成工具的texurePacker里，设置图片名称，让他自动帮你生成动画：
 
-![](/Canvas/auto.png)
+![](/simple-blog/Canvas/auto.png)
 
 此时通过spritesheet实例化生成的精灵表中，可以看到有animations属性（一个图片集数组），我们直接把它放到AnimatedSprite，就是一个动画精灵了
 
@@ -1255,7 +1255,7 @@ container.sortableChildren = true;
 
 如果反复执行（来回切换tab而不断创建， 销毁react组件）useEffect，此时内存会囤积大量Text的texture，像这样：
 
-![](/Canvas/q1.png)
+![](/simple-blog/Canvas/q1.png)
 
 解决方法：
 
@@ -1269,7 +1269,7 @@ container.sortableChildren = true;
 
 通过`app.destroy(true, { children: true }) `的形式销毁，因为直接传true的话会把所有children下的baseTexture销毁（把图片资源也销毁了）
 
-![image-20231108205107393](/Canvas/q2.png)
+![image-20231108205107393](/simple-blog/Canvas/q2.png)
 
 ##### 低帧数低端机动画速率问题
 
@@ -1279,9 +1279,9 @@ pixi的ticker使用的是requestAnimationFrame 向下兼容 setinterval，但是
 
 我们看下Tweenjs源码，实际上他们都是依赖 performance.now() 去换算执行时间，而不是直接通过ticker的执行速率
 
-![](/Canvas/low.png)
+![](/simple-blog/Canvas/low.png)
 
-![](/Canvas/low2.png)
+![](/simple-blog/Canvas/low2.png)
 
 所以我们也可以通过每次执行ticker拿到performance.now去做timestamp的换算，去做动画
 

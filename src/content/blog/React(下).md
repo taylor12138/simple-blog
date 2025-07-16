@@ -146,9 +146,9 @@ React.useEffect(() => {
 
 useEffect回调执行 ->  fiber节点上增加Passive的effect
 
-![](/React(下)/effect.jpg)
+![](/simple-blog/React(下)/effect.png)
 
-![](/React(下)/effect2.jpg)
+![](/simple-blog/React(下)/effect2.png)
 
 然后在render阶段 -> commit阶段的时候，会传递一条effect链表，里面可能包含了Placement、Passive等
 
@@ -1401,7 +1401,7 @@ https://segmentfault.com/a/1190000020108840
 
 一张图明示两者的差异
 
-![](/React(下)/react17.jpg)（2) React 17支持新的JSX转换。我们还将对它支持到React 16.14.0，React 15.7.0和0.14.10。需要注意的是，这是完全选择启用的，您也不必使用它。之前的JSX转换的方式将继续存在，并且没有计划停止对其支持。
+![](/simple-blog/React(下)/react17.png)（2) React 17支持新的JSX转换。我们还将对它支持到React 16.14.0，React 15.7.0和0.14.10。需要注意的是，这是完全选择启用的，您也不必使用它。之前的JSX转换的方式将继续存在，并且没有计划停止对其支持。
 
 更多：https://juejin.cn/post/6885881513741647886
 

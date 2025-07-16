@@ -18,7 +18,7 @@ pubDate: 2021-03-15
 
   - 不同浏览器在http1或http1.1对请求的限制数量
 
-  ![](/超文本传输协议new/tcpNum.jpg)
+  ![](/simple-blog/超文本传输协议new/tcpNum.jpg)
 
 - 压缩headers（最小数据量化）
 
@@ -52,7 +52,7 @@ pubDate: 2021-03-15
 
 #### URL
 
-![](/超文本传输协议new/url.jpg)
+![](/simple-blog/超文本传输协议new/url.jpg)
 
 URL：统一资源定位器
 
@@ -109,7 +109,7 @@ console.log(`?x=${encodeURIComponent('шеллы')}`);
 
 一张图片清晰明了
 
-![](/超文本传输协议new/encodecontent.png)
+![](/simple-blog/超文本传输协议new/encodecontent.png)
 
 
 
@@ -199,9 +199,9 @@ xml文件标记：application/xml;
 
 #### 报文和实体
 
-![](/超文本传输协议new/header1.jpg)
+![](/simple-blog/超文本传输协议new/header1.jpg)
 
-![](/超文本传输协议new/header2.jpg)
+![](/simple-blog/超文本传输协议new/header2.jpg)
 
 http报文和http实体是不同的概念，http报文类似于运输的箱子，http实体类似于箱子中的货物（个人感觉  实体 = 报文 - 行 - 除了实体首部字段的所有首部字段）
 
@@ -360,7 +360,7 @@ HTTP 报文包含报文首部和报文主体，报文首部包含请求行（或
 
 504：网关超时
 
-![](/超文本传输协议new/ajax.jpg)
+![](/simple-blog/超文本传输协议new/ajax.jpg)
 
 
 
@@ -414,7 +414,7 @@ http缓存都是从第二次请求开始的。第二次请求时，浏览器判�
 - 协商缓存：（当前缓存过期）浏览器发送请求到服务器，服务器判定是否可使用本地缓存。
 - 联系与区别：两种缓存方式最终使用的都是本地缓存；前者无需与服务器交互，后者需要。
 
-![](/超文本传输协议new/huancun2.jpg)
+![](/simple-blog/超文本传输协议new/huancun2.jpg)
 
 
 
@@ -428,7 +428,7 @@ http缓存都是从第二次请求开始的。第二次请求时，浏览器判�
 
 **前端缓存图**：
 
-![](/超文本传输协议new/huancun.jpg)
+![](/simple-blog/超文本传输协议new/huancun.jpg)
 
 
 
@@ -448,7 +448,7 @@ corsImageModified.src = url + "?not-from-cache-please";
 
 亦或者是
 
-![](/超文本传输协议new/fake.png)
+![](/simple-blog/超文本传输协议new/fake.png)
 
 这将强制浏览器不使用以前的缓存图像，而是为图像发送新的GET请求，我们添加的 GET 参数无关紧要，只要生成的 URL 与初始（缓存）图像 URL 不同即可。
 
@@ -539,7 +539,7 @@ Quic 全称 quick udp internet connection ，“快速 UDP 互联网连接”，
 
 1. **减少了 TCP 三次握手及 TLS 握手时间。**
 
-   ![](/超文本传输协议new/quic.jpg)
+   ![](/simple-blog/超文本传输协议new/quic.jpg)
 
    HTTPS 的一次完全握手的建连过程，需要 3 个 RTT，而QUIC由于建立在UDP的基础上，只需要0RTT即可完成安全握手。
 
@@ -563,7 +563,7 @@ Quic 全称 quick udp internet connection ，“快速 UDP 互联网连接”，
 
      假设 Packet N 丢失了，发起重传，重传的 Packet Number 是 N+2，但是它的 Stream 的 Offset 依然是 x，这样就算 Packet N + 2 是后到的，依然可以将 Stream x 和 Stream x+y 按照顺序组织起来，交给应用程序处理。
 
-     ![](/超文本传输协议new/quic4.jpg)
+     ![](/simple-blog/超文本传输协议new/quic4.jpg)
 
      
 
@@ -581,9 +581,9 @@ Quic 全称 quick udp internet connection ，“快速 UDP 互联网连接”，
 
    而对比QUIC，http2.0的多路复用会队头阻塞，本身强制使用的TLS协议也存在一个队头阻塞
 
-   ![](/超文本传输协议new/quic2.jpg)
+   ![](/simple-blog/超文本传输协议new/quic2.jpg)
 
-   ![](/超文本传输协议new/quic3.jpg)
+   ![](/simple-blog/超文本传输协议new/quic3.jpg)
 
 4. **连接迁移。**
 

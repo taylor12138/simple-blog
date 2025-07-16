@@ -22,7 +22,7 @@ Vite官方的定位：下一代前端开发和构建工具
 
 所以构建过程中 Vite 中仍然使用 Esbuild 进行编译和压缩，但打包留给 Rollup。所以 esbuild 用于构建过程的一部分。
 
-![](/Vite/engine.png)
+![](/simple-blog/Vite/engine.png)
 
 图片源自神三元的《深入浅出vite》
 
@@ -116,7 +116,7 @@ Rollup 也是前端模块化的一个打包工具，它的开发本意，是打�
 
 - 工具库打包后体积更小一点
 
-  ![](/Vite/rollupbundle.png)
+  ![](/simple-blog/Vite/rollupbundle.png)
 
   
 
@@ -178,7 +178,7 @@ npx rollup --config
 
 打包工具特性对比总览
 
-![](/Vite/all.png)
+![](/simple-blog/Vite/all.png)
 
 
 
@@ -244,7 +244,7 @@ npm start
 
 然而，`CRA`也有自身的痛点（也是`Vite`力主提升的方向）：当项目体积变大，开发时间和构建时间也会大幅增加。**原因是，无论进行任何更改，`CRA`都会全量的重新构建应用。**
 
-![](/Vite/cra.png)
+![](/simple-blog/Vite/cra.png)
 
 而vite不同
 
@@ -260,7 +260,7 @@ npm start
 
 源码采用了ESM（ECMAScript modules）作为模块体系。好处是无需打包，按需加载，从图中我们可以看到那种按需的感觉
 
-![](/Vite/cra2.png)
+![](/simple-blog/Vite/cra2.png)
 
 
 
@@ -607,13 +607,13 @@ export default function testHookPlugin () {
 
 下图源自神三元的《深入浅出Vite》
 
-![](/Vite/vite-plugin.png)
+![](/simple-blog/Vite/vite-plugin.png)
 
 **插件顺序**
 
 如果是直接看全部插件种类的顺序则为
 
-![](/Vite/vite-plugin-2.png)
+![](/simple-blog/Vite/vite-plugin-2.png)
 
 
 
@@ -692,7 +692,7 @@ export default {
 }
 ```
 
-![](/Vite/jianrong.png)
+![](/simple-blog/Vite/jianrong.png)
 
 
 
@@ -774,7 +774,7 @@ Vite build默认mode：**production**
 
 值得注意的是，对应的环境变量要加上VITE_前缀，目的是：
 
-![](/Vite/vite_env.png)
+![](/simple-blog/Vite/vite_env.png)
 
 
 

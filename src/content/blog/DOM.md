@@ -295,7 +295,7 @@ dom提供的获取元素方法比较繁琐，利用节点父子兄弟关系获�
 
 （总共有12种节点，以下展示部分节点）
 
-![](/DOM/jiedian.jpg)
+![](/simple-blog/DOM/jiedian.png)
 
 父亲节点： `node.parentNode` (得到的是离元素最近的父节点，找不到父节点返回空值)
 
@@ -475,7 +475,7 @@ xx.innerHTML = arr.join('');
 
 这里举了一个很好的例子，shadow dom 就像一个video：https://www.cnblogs.com/coco1s/p/5711795.html
 
-![](/DOM/shadowdom.png)
+![](/simple-blog/DOM/shadowdom.png)
 
 创建方式： `elem.attachShadow({mode: …})`
 

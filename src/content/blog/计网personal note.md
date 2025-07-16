@@ -107,7 +107,7 @@ description: '计网相关知识'
 
 关于实体、协议、服务和接口：
 
-![](/计网personal note/jiwang.jpg)
+![](/simple-blog/计网personal note/jiwang.jpg)
 
 1.实体：第n层元素称为n层实体，同层另外一端主机的实体叫对等实体
 
@@ -164,7 +164,7 @@ TCP/IP的应用层：合并应用层、表示层、会话层
 
 #### 香农定理
 
-![](/计网personal note/jiwang13.jpg)
+![](/simple-blog/计网personal note/jiwang13.jpg)
 
 
 
@@ -176,7 +176,7 @@ TCP/IP的应用层：合并应用层、表示层、会话层
 
 #### 数据通信基础知识
 
-![](/计网personal note/jiwang2.jpg)
+![](/simple-blog/计网personal note/jiwang2.jpg)
 
 - 数据：传送消息的实体，通常是有意义的符号序列
 
@@ -214,7 +214,7 @@ TCP/IP的应用层：合并应用层、表示层、会话层
 
 宽带信号：将基带信号进行调制模拟后形成频分复（载波调制）用模拟信号，再传送到模拟信道上去传输（宽带传输）。载波调制（带通调制）把信号频率范围调到较高的频段以便在信道中传输
 
-![](/计网personal note/jiwang3.jpg)
+![](/simple-blog/计网personal note/jiwang3.jpg)
 
 ##### 编码方式
 
@@ -349,7 +349,7 @@ CRC循环冗余码：
 
 后退N帧协议，发送窗口大小>1，接收窗口大小=1
 
-![](/计网personal note/jiwang4.jpg)
+![](/simple-blog/计网personal note/jiwang4.jpg)
 
 累积确认：接收方不用对于每个数据帧返回确认帧，可以隔一会返回一个确认帧，它保证这个帧，以及之前的所有帧都得到了确认
 
@@ -363,7 +363,7 @@ CRC循环冗余码：
 
 和后退N帧不同的是，如果帧没有按序到达，也会将之后序号的帧暂存在接收窗口
 
-![](/计网personal note/jiwang5.jpg)
+![](/simple-blog/计网personal note/jiwang5.jpg)
 
 如果接收方收到的帧序号是窗口的下界（最左边窗口对应的序号），则窗向前移动到最小序号未确认帧处
 
@@ -407,7 +407,7 @@ CD：碰撞检测，“边发送边监听”，适配器边发送数据，边检
 
 只要经过 2T 时间没有检验出碰撞，就能肯定这次不会发生碰撞（T为单程端到端的传播时延）
 
-![](/计网personal note/jiwang6.jpg)
+![](/simple-blog/计网personal note/jiwang6.jpg)
 
 采用截断二进制指数规避算法确定重传时机：
 
@@ -431,7 +431,7 @@ MAC层主要功能包括数据帧的封装和卸装
 
 MAC帧：是以以太网V2的格式
 
-![](/计网personal note/jiwang7.jpg)
+![](/simple-blog/计网personal note/jiwang7.jpg)
 
 
 
@@ -579,7 +579,7 @@ RIP其实是应用层的协议，使用UDP传送数据，使用UDP'无可靠保�
 - 数据报中有片偏移数据段，指出较长分组分片后，某片在原分组相对位置，以8B为单位，所以能得出除了最后一个分片，每个分片的长度都一定是8B的整数倍
 - ip数据报固定首部长度为20字节
 
-![](/计网personal note/jiwang8.jpg)
+![](/simple-blog/计网personal note/jiwang8.jpg)
 
 #### ip地址
 
@@ -599,9 +599,9 @@ ip地址{<网络号>, <主机号>}，如果主机连在一个网络上，则网�
 
 分类分成5类，分类方法靠前面的四位来区分 ，分类因为各网络差异比较大，有的网络主机数多，有的少，且ip地址是32位，我们为了便于书写，常常每八位插入一个空格（但在机器中并没有这样的空格）
 
-![](/计网personal note/jiwang9.jpg)
+![](/simple-blog/计网personal note/jiwang9.jpg)
 
-![](/计网personal note/jiwang10.jpg)
+![](/simple-blog/计网personal note/jiwang10.jpg)
 
 A类：2^7-2是因为全零指本网，全1；127指回环，2^24-2是因为全零指本机，全1指广播地址
 
@@ -761,7 +761,7 @@ IPV6向IPV4过渡策略：双栈协议（同时启用IPV4和IPV6）、隧道技�
 
 重要端口号：
 
-![](/计网personal note/jiwang11.jpg)
+![](/simple-blog/计网personal note/jiwang11.jpg)
 
 
 
@@ -881,7 +881,7 @@ tcp连接建立采用客户服务器方式，主动发起连接的应用进程�
 
 拥塞控制是全局性的过程，防止过多数据注入网络
 
-![](/计网personal note/jiwang12.jpg)
+![](/simple-blog/计网personal note/jiwang12.jpg)
 
 拥塞控制的方法：
 
@@ -909,11 +909,11 @@ tcp连接建立采用客户服务器方式，主动发起连接的应用进程�
 
 慢开始 + 拥塞避免
 
-![](/计网personal note/yongse.jpg)
+![](/simple-blog/计网personal note/yongse.jpg)
 
 慢开始+拥塞避免+快重传+快恢复
 
-![](/计网personal note/kuai.jpg)
+![](/simple-blog/计网personal note/kuai.jpg)
 
 
 
@@ -1032,7 +1032,7 @@ P2P模型：
 - 迭代查询（靠自己，由自己来查询根域名服务器，顶级域名服务器，一般本地域名服务器  -> 向根域名服务器的查询的迭代查询）
   - 客户端发出一次请求，对方如果没有授权回答，它就会返回一个能解答这个查询的其它名称服务器列表，客户端会再向返回的列表中发出请求，直到找到最终负责所查域名的名称服务器，从它得到最终结果。
 
-![](/计网personal note/dnsfind.jpg)
+![](/simple-blog/计网personal note/dnsfind.jpg)
 
 #### 万维网和http协议
 

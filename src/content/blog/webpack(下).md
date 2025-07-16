@@ -14,7 +14,7 @@ description: wepack解析
 
 将多个模块依赖，转变成单个静态资源（js、css、jpg、png）
 
-![](/webpack/webpack2.jpg)
+![](/simple-blog/webpack/webpack2.jpg)
 
 打包，是指处理某些文件并将其输出为其他文件的能力。
 
@@ -55,7 +55,7 @@ npx webpack serve
 
 然后你就可以看到
 
-![](/webpack/graph.jpg)
+![](/simple-blog/webpack/graph.jpg)
 
 
 
@@ -364,7 +364,7 @@ HMR Socket Server是一个socket长连接：
 
 #### 实现热更新
 
-![](/webpack/hotloading.jpg)
+![](/simple-blog/webpack/hotloading.jpg)
 
 图片来自饿了么前端@知乎专栏
 
@@ -446,7 +446,7 @@ module.exports = {
 
 ## 中间插播小笑话
 
-![](/webpack/webpack.jpg)
+![](/simple-blog/webpack/webpack.jpg)
 
 部分资料参考地址https://juejin.cn/post/6844903877771264013
 
@@ -462,13 +462,13 @@ module.exports = {
 
 虽然 Monorepo 可以一定程度解决重复安装和修改困难的问题（依赖复用），但依然需要走本地编译，并且还要求**所有的应用代码必须放到同一个仓库**。
 
-![](/webpack/fed2.png)
+![](/simple-blog/webpack/fed2.png)
 
 2. umd共享模块
 
 将模块用 Webpack UMD 模式打包，并输出到其他项目中。这是非常普遍的模块共享方式
 
-![](/webpack/fed3.png)
+![](/simple-blog/webpack/fed3.png)
 
 像这种
 
@@ -502,13 +502,13 @@ module.exports = {
 
 2）整体应用一起打包，很好解决上面的问题，但打包速度实在是太慢了，不具备水平扩展能力。
 
-![](/webpack/fed4.png)
+![](/simple-blog/webpack/fed4.png)
 
 
 
 4. webpack5的模块联邦，是直接将原来的应用依赖的包（模块），直接引用于另外一个项目/应用，在模块联邦中，更注重项目与项目之间的引用（A用了B的xx模块，B用了C的xx模块），相对来说是mf 是去中心化的(其实也挺像npm包的感觉)，当然这种引用关系也可以运用到微前端这种突出主和子应用的关系中去
 
-![](/webpack/federation.png)
+![](/simple-blog/webpack/federation.png)
 
 #### 底层概念
 
@@ -604,7 +604,7 @@ module.exports = {
 
 编译后的结果：
 
-![](/webpack/fed1.png)
+![](/simple-blog/webpack/fed1.png)
 
 除去生成的map文件，有四个文件：`main.js`、`remoteEntry.js`、`...react_index.js`、`...react-dom_index.js`；
 
@@ -788,7 +788,7 @@ export default class App extends React.Component{
 
 shared版本问题：
 
-![](/webpack/fed5.png)
+![](/simple-blog/webpack/fed5.png)
 
 正确做法
 

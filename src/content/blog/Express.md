@@ -82,7 +82,7 @@ app.listen(5208, () => {
 
 express的response方法一览
 
-![](/Express/res.png)
+![](/simple-blog/Express/res.png)
 
 
 

@@ -232,7 +232,7 @@ A primitive value is a member of one of the following built-in types: **Undefine
 
 - Object
 
-![](/JavaScript基础/javaScript_base.jpg)
+![](/simple-blog/JavaScript基础/javaScript_base.jpg)
 
 总结：USONB  （you are so niubi）
 
@@ -553,7 +553,7 @@ let arr2 = Array.from(arraylike);  //[a, b]
 
 
 
-![](/JavaScript基础/kaobei.jpg)
+![](/simple-blog/JavaScript基础/kaobei.png)
 
 
 
@@ -597,7 +597,7 @@ JavaScript 内部，所有数字都是以64位浮点数形式储存，即使整�
 
 而位操作并不直接应用到64位，而是先把值转换为32位整数，在进行位操作，最后再把32位转换为34位存储起来
 
-![](/JavaScript基础/jingdu.png)
+![](/simple-blog/JavaScript基础/jingdu.png)
 
 - `NaN`是 JavaScript 的特殊值，表示“非数字”（Not a Number），主要出现在将字符串解析成数字出错的场合。
 

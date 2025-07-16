@@ -372,7 +372,7 @@ const angle = Math.atan2(...args); // error! Expected 2 arguments, but got 0 or 
 console.log(angle);
 ```
 
-![](/TypeScript/as_const.jpg)
+![](/simple-blog/TypeScript/as_const.jpg)
 
 也可以解释为，当前类型为`number[]`，数组数量可以被修改，所以时显示 ”0或更多“
 
