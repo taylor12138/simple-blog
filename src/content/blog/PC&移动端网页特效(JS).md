@@ -38,8 +38,6 @@ offsetWidth等属性是只读属性，只能获取不能赋值                st
 
 ![](/simple-blog/PC&移动端网页特效(JS)/offset.png)
 
-
-
 ## 2.元素可视区client
 
 通过client系列的相关属性可以动态得到该元素的边框大小、元素大小等（与offset不同点是边框是否囊括其中）
@@ -54,8 +52,6 @@ offsetWidth等属性是只读属性，只能获取不能赋值                st
 
 - `clientHeight` 可以通过 CSS `height` + CSS `padding` - 水平滚动条高度 (如果存在)来计算.
 - **备注:** 此属性会将获取的值四舍五入取整数。 如果你需要小数结果, 请使用 [`element.getBoundingClientRect()`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect).
-
-
 
 ## （番外）立即执行函数
 
@@ -77,8 +73,6 @@ fn();
 
 立即执行函数最大的优点就是独立创建了一个作用域
 
-
-
 ## 3.元素滚动scroll
 
 获取或设置一个元素的内容垂直滚动的像素数
@@ -92,8 +86,6 @@ father.addEventListener('scroll', () => {
     console.log(father.scrollTop);
 })
 ```
-
-
 
 `element.scrollHeight`  返回自身高度，不含边框，不带单位，像`clientHeight`  +  超出文字部分高度
 
@@ -115,8 +107,6 @@ father.addEventListener('scroll', () => {
 
 让窗口滚动事件：`window.scroll(x, y)`
 
-
-
 #### 判断元素是否有滚动条
 
 判断竖向滚动条
@@ -132,8 +122,6 @@ el.scrollHeight > el.clientHeight
 - **clientHeight**
   指的是元素的内部高度的px值，包括content和padding值之和，并不包括横向滚动条（horizontal scrollbar）、border和margin的值。
 
-
-
 判断横向滚动条
 
 ```vim
@@ -147,8 +135,6 @@ el.scrollWidth > el.clientWidth
 - **clientWidth**
   指的是元素的内部宽度的px值，包括content和padding值之和，并不包括横向滚动条（horizontal scrollbar）、border和margin的值。
 
-
-
 #### 滚动事件方案
 
 `antdesign`对scroll的处理（滚动到屏幕顶部）
@@ -158,8 +144,6 @@ https://github.com/ant-design/ant-design/blob/master/components/_util/scrollTo.t
 网络上的一些滚动方案
 
 https://www.cnblogs.com/nolaaaaa/p/9021967.html
-
-
 
 #### 三大系列总结
 
@@ -171,7 +155,103 @@ scroll常用于获取滚动距离  `element.scrollTop`    `element.scrollLeft`  
 
 
 
-##  4.滚动至浏览器的可视区域
+### 总结
+
+##### 📐 1. **getBoundingClientRect()**
+
+**类型**：方法（返回 DOMRect 对象）  
+**作用**：获取元素**相对于视口(viewport)**的位置和尺寸信息。
+
+
+
+```js
+const rect = element.getBoundingClientRect();
+console.log(rect.top, rect.left, rect.width, rect.height);
+```
+
+**返回对象属性**：
+
+- `top`：元素顶部到**视口顶部**的距离
+
+- `left`：元素左侧到**视口左侧**的距离
+
+- `width`/`height`：元素边框尺寸（border-box）
+
+- `bottom`：元素底部到视口顶部的距离
+
+- `right`：元素右侧到视口左侧的距离
+
+**特点**：
+
+- 值随页面滚动实时变化
+
+- 包含边框(border)、内边距(padding)和内容
+
+- 坐标系原点始终是当前视口左上角
+
+##### 🔝 2. **offsetTop**
+
+**类型**：属性  
+**作用**：获取元素**相对于 offsetParent** 的垂直距离。
+
+```js
+const topPosition = element.offsetTop;
+```
+
+**特点**：
+
+- 从元素边框外边缘(border-box)到 offsetParent 边框内边缘(content-box)
+
+- `offsetParent` 是最近的定位祖先（position 非 static）
+
+- 值固定不变（不随滚动变化）
+
+- 包含元素自身的 margin，但不包含 offsetParent 的 padding
+
+#### 🖱 3. **scrollTop**
+
+**类型**：属性（可读写）  
+**作用**：获取或设置元素**内容垂直滚动的像素数**。
+
+```js
+// 获取滚动距离
+const scrolled = element.scrollTop;
+
+// 设置滚动位置
+element.scrollTop = 100;
+
+```
+
+**特点**：
+
+- 表示内容顶部被卷起的高度
+
+- 可读写属性（可控制滚动位置）
+
+- 当元素无滚动条时值为 0
+
+- 常用于监听滚动事件
+
+##### 🔲 4. **clientTop**
+
+**类型**：属性（只读）  
+**作用**：获取元素**上边框的厚度**。
+
+```js
+const borderWidth = element.clientTop; // 等同于CSS border-top-width
+```
+
+**特点**：
+
+- 实际就是 `border-top-width` 的计算值
+
+- 不包含内边距或外边距
+
+- 主要用于获取边框尺寸
+
+
+
+## 4.滚动至浏览器的可视区域
 
 方法一：图片/元素的`offsetTop`  < 当前的元素父亲的`scrollTop` 
 
@@ -184,8 +264,6 @@ scroll常用于获取滚动距离  `element.scrollTop`    `element.scrollLeft`  
  图片/元素的`getBoundingClientRect().top` <  `window.innerHeight`  且
 
  图片/元素的`getBoundingClientRect().bottom` > 0 
-
-
 
 ![](/simple-blog/PC&移动端网页特效(JS)/getbund.png)
 
@@ -246,8 +324,6 @@ function initObserver() {
 initObserver();
 ```
 
-
-
 #### 兼容性
 
 - Chrome 51+（发布于 2016-05-25）
@@ -257,8 +333,6 @@ initObserver();
 - IE不支持。。。
 
 more：阮一峰老师http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html
-
-
 
 #### Chrome 的黑科技——loading 属性
 
@@ -278,11 +352,9 @@ more：阮一峰老师http://www.ruanyifeng.com/blog/2016/11/intersectionobserve
 
 ```html
 <li class="list-item">
-    <img class="list-item-img" alt="loading" loading="lazy" 				           src='https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3648955221,727328923&fm=26&gp=0.jpg'>
+    <img class="list-item-img" alt="loading" loading="lazy"                            src='https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3648955221,727328923&fm=26&gp=0.jpg'>
 </li>
 ```
-
-
 
 **原理**
 
@@ -300,11 +372,7 @@ if ("loading" in HTMLImageElement.prototype) {
     }
 ```
 
-
-
 来源https://zhuanlan.zhihu.com/p/76820878
-
-
 
 ## 5.动画函数封装
 
@@ -313,10 +381,10 @@ if ("loading" in HTMLImageElement.prototype) {
 ```html
 <div></div>
 <script>
-	//简单动画函数封装obj目标函数，target目标位置
+    //简单动画函数封装obj目标函数，target目标位置
     //给不同的元素制定了不同的定时器
     //不过再js中尽量避免这一种“先创建再补充”的动态属性赋值
-	function animate(obj, target) {
+    function animate(obj, target) {
         obj.timer = setInterval(function () {
             if (obj.offsetLeft >= target) {
                 clearInterval(obj.timer);
@@ -326,8 +394,8 @@ if ("loading" in HTMLImageElement.prototype) {
         }, 30);
     }
 // 调用函数
-	let div = document.querySelector('div');
-	animate(div, 300);
+    let div = document.querySelector('div');
+    animate(div, 300);
 </script>
 ```
 
@@ -339,8 +407,6 @@ if ("loading" in HTMLImageElement.prototype) {
 
 动画函数添加回调函数：回调函数原理为函数作为一个参数，即将这个函数作为参数传到另一个函数里，当那个函数执行完毕之后，再执行传进去的这个函数，这个过程叫做回调
 
-
-
 添加了一点细节和回调函数后的改进代码
 
 ```javascript
@@ -348,41 +414,39 @@ if ("loading" in HTMLImageElement.prototype) {
 //给不同的元素制定了不同的定时器
 //不过再js中尽量避免这一种“先创建再补充”的动态属性赋值
 function animate(obj, target, callback) {
-	// 当我们不断点击按钮，元素速度会越来越快，因为开启了太多定时器
-	// 解决方案就是让我恩的元素只有一个定时器执行,清楚之前的定时器
-	clearInterval(obj.timer);
-	obj.timer = setInterval(function () {
-		// 把步长值改为整数，不要出现小数的问题
-		let step = (target - obj.offsetLeft) / 10;
-		// 正值往小的取整，负值往大的取证, 保证数值刚好等于target（）
-		step = step > 0 ? Math.ceil(step) : Math.floor(step);
-    	// 可以让800回到500，所以用== 而不是>= 
-		if (obj.offsetLeft == target) {
-			clearInterval(obj.timer);
-			// 如果有回调函数，在定时器结束时调用
-			/*if (callback) {
-			callback();
-			}*/
+    // 当我们不断点击按钮，元素速度会越来越快，因为开启了太多定时器
+    // 解决方案就是让我恩的元素只有一个定时器执行,清楚之前的定时器
+    clearInterval(obj.timer);
+    obj.timer = setInterval(function () {
+        // 把步长值改为整数，不要出现小数的问题
+        let step = (target - obj.offsetLeft) / 10;
+        // 正值往小的取整，负值往大的取证, 保证数值刚好等于target（）
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        // 可以让800回到500，所以用== 而不是>= 
+        if (obj.offsetLeft == target) {
+            clearInterval(obj.timer);
+            // 如果有回调函数，在定时器结束时调用
+            /*if (callback) {
+            callback();
+            }*/
             //更棒写法
             callback && callback();
-		} else {
-			obj.style.left = obj.offsetLeft + step + 'px';
-		}
-	}, 30);
+        } else {
+            obj.style.left = obj.offsetLeft + step + 'px';
+        }
+    }, 30);
 }
 // 调用函数
 let div = document.querySelector('div');
 let btn500 = document.querySelector('.btn500');
 let btn800 = document.querySelector('.btn800');
 btn500.addEventListener('click', function () {
-	animate(div, 500, function () { alert('hello') });
+    animate(div, 500, function () { alert('hello') });
 })
 btn800.addEventListener('click', function () {
-	animate(div, 800);
+    animate(div, 800);
 })
 ```
-
-
 
 ## 6.双击进入全屏
 
@@ -402,15 +466,13 @@ window.addEventListener("dblclick", () => {
 
 ```js
 window.addEventLisnter('dblclick', () => {
-	if(!document.fullscreenElement) {
-		canvas.requestFullscreem()''
-	} else {
-		document.exitFullscreen();
-	}
+    if(!document.fullscreenElement) {
+        canvas.requestFullscreem()''
+    } else {
+        document.exitFullscreen();
+    }
 })
 ```
-
-
 
 # 移动端
 
@@ -475,8 +537,6 @@ div.addEventListener('touchstart', function() {})
 `touches`：一个`Touch`对象代表一个触点，当有多个手指触摸屏幕时，`TouchList`就会存储多个`Touch`对象，前面说到的`identifier`就用来区分每个手指对应的`Touch`对象。
 
 pageX、clientX、screenX的不同：https://stackoverflow.com/questions/6073505/what-is-the-difference-between-screenx-y-clientx-y-and-pagex-y
-
-
 
 ## 2.移动端常见特效
 
@@ -559,8 +619,6 @@ import fastClick from 'fastclick'
 fastClick.attach(document.body)
 ```
 
-
-
 #### 展望现在
 
 谷歌的开发者文档[《300ms tap delay, gone away》](https://link.zhihu.com/?target=https%3A//developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away)里面还提到在2014年的Chrome 32版本已经把这个延迟去掉了，如果有一个meta标签：
@@ -587,8 +645,6 @@ html{
 
 这样也可以取消掉300ms的延迟，Chrome和Safari都可以生效。
 
-
-
 ## 3.摇一摇事件
 
 html5新增了一个devicemotion的事件，可以使用手机的重力感应。如下代码所示：
@@ -604,17 +660,11 @@ x，y，z表示三个方向的重力加速度
 
 ![](/simple-blog/PC&移动端网页特效(JS)/shake.png)
 
-
-
-
-
 `devicemotion`事件会被不断地触发，根据以上，我们可以拿到摇摆的角度 + 时间间隔来判断用户是否是摇一摇！
 
 注意：ios 13 beat2 更新之后, `devicemotion`实践需要用户授权了
 
 参考链接https://zhuanlan.zhihu.com/p/28052894
-
-
 
 ## 4.框架
 
@@ -626,15 +676,13 @@ x，y，z表示三个方向的重力加速度
 
 官网：https://getbootstrap.com/
 
-2.x.x	已经停止维护，功能不够完善
+2.x.x    已经停止维护，功能不够完善
 
 3.x.x  目前使用最多，但已经放弃了ie6，ie7，对ie8支持但是界面效果不好，偏向于开发响应式布局，移动设备优先的web项目
 
 4.x.x 最新版，但是目前不流行
 
 根据官网的介绍引入js和结构即可使用
-
-
 
 ## 5.移动端滚动
 
@@ -675,7 +723,7 @@ html部分：
 ```html
 <div class="wrapper">
     <ul>
-  	 <!--许多的li -->
+       <!--许多的li -->
     </ul>
   </div>
 ```
@@ -692,9 +740,8 @@ html部分：
 - `BScroll`是不能实时监听滚动位置的，需要配置`probeType`
 
 - better-scroll 管理的标签内部默认会阻止浏览器原生的click事件，需要配置`click`
+
 - 必须在实例对象里开启`pullUpLoad`才能使用`pullingUp`事件，`pullingUp`事件只会触发一次，想要在发送网络请求，将新数据展示完毕继续使用该功能的话，需要 `scroll.finishPullUp()`
-
-
 
 `new BScroll(wrapper, {配置option})`
 
@@ -742,8 +789,6 @@ console.log(this.scroll.x);
 console.log(this.scroll.y);
 ```
 
-
-
 #### 解决better-scroll可滚动区域产生的bug
 
 better-scroll滚动区域是由 `scrollHeight`属性决定的，也就是content中子组件的高度
@@ -755,8 +800,6 @@ better-scroll滚动区域是由 `scrollHeight`属性决定的，也就是content
 - 监听每一张图片加载完成（每一次的网络请求），只要有一张图片加载完成，就调用 `refresh()`一次
   - `img.onload() = funciton(){}`（vue中，监听加载则 `@load="函数名"`）
   - 使用事件总线 eventBus，管理、传递该加载事件到对应的组件，然后进行 `refresh()`
-
-
 
 ## 6.防抖函数
 
@@ -800,8 +843,6 @@ mounted() {
 },
 ```
 
-
-
 ## 7.节流阀
 
 控制速度，用于类似于防止轮播图按钮连续点击，导致播放过快的后果
@@ -822,8 +863,6 @@ mounted() {
         }
     })
 ```
-
-
 
 平时开发中常遇到的场景：
 
@@ -861,8 +900,6 @@ function showTop  () {
 window.onscroll = throttle(showTop,1000) 
 ```
 
-
-
 其实也可以称之为前置防抖，因为可以这样写
 
 ```js
@@ -882,8 +919,6 @@ export const leadDebounce = (fn, delay = 400) => {
 };
 ```
 
-
-
 ## 8.异步竞态
 
 解决方案：
@@ -900,18 +935,16 @@ export const leadDebounce = (fn, delay = 400) => {
 
 ```js
 useEffect(() => {
-	let didRequest = false;
-	异步请求.then((data) => {
-		if (!didRequest) {
-			setState(xx);
-			//..
-		}
-	});
-	return () => didRequest = true;
+    let didRequest = false;
+    异步请求.then((data) => {
+        if (!didRequest) {
+            setState(xx);
+            //..
+        }
+    });
+    return () => didRequest = true;
 })
 ```
-
-
 
 ## 9.懒加载
 
@@ -925,8 +958,6 @@ const changeTime = async () => {
     setNowTime(moment.default(Date.now()).format());
 };
 ```
-
-
 
 ## 10.一些其他的优化
 
