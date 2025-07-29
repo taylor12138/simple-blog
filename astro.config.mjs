@@ -29,6 +29,13 @@ export default defineConfig({
                 "@": "/src",
             },
         },
+        css: {
+            preprocessorOptions: {
+                less: {
+                    javascriptEnabled: true,
+                },
+            },
+        },
     },
     site: "https://taylor12138.github.io",
     base: "/simple-blog/",
