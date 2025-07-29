@@ -1,13 +1,5 @@
 @import "colors";
 
-@font-face {
-  font-family: "p5-Bold";
-  font-weight: 700;
-  src: url("/fonts/AlimamaShuHeiTi-Bold.woff2") format("woff2"),
-       url("/fonts/AlimamaShuHeiTi-Bold.woff") format("woff");
-  font-display: swap;
-}
-
 * {
   padding: 0;
   margin: 0;
