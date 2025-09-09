@@ -18,6 +18,9 @@ description: 'node相关知识'
 
 - Hapi：13.2k star，express占领榜首，最高活跃度）
 
+- Egg.js 是阿里巴巴开源的**企业级 Node.js 框架**，基于 Koa.js 构建。
+
+
 安装：用VScode打开文件目录，然后在该目录下右键->在集成终端打开->输入命令 `npm init --yes`  进行初始化，创建一个package.json文件-> `npm i express --save` 安装框架 ->  在js中输入
 
 它！：

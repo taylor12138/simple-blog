@@ -320,6 +320,97 @@ C
 
 
 
+因此
+
+`requestAnimationFrame` 既不是微任务也不是宏任务，它是一种**特殊的渲染任务**，在浏览器的渲染流水线中执行。
+
+#### requestAnimationFrame 的执行时机
+
+```javascript
+// Event Loop 的完整流程
+1. 执行同步代码（Call Stack）
+2. 执行所有微任务（Microtask Queue）
+3. 检查是否需要渲染
+4. 执行 requestAnimationFrame 回调
+5. 执行渲染（Layout, Paint）
+6. 执行宏任务（Macrotask Queue）
+```
+
+为什么不会造成死循环？
+
+1. 受浏览器刷新率限制
+
+```javascript
+function animate() {
+  console.log('Frame:', Date.now());
+  requestAnimationFrame(animate);
+}
+animate();
+
+// 每秒最多执行 60 次（60fps），而不是无限执行
+```
+
+2. 与微任务的对比
+
+```javascript
+// 微任务死循环 - 会阻塞渲染
+function microTaskLoop() {
+  Promise.resolve().then(microTaskLoop);
+}
+microTaskLoop(); // 浏览器卡死
+
+// RAF 循环 - 不会阻塞
+function rafLoop() {
+  console.log('RAF executed');
+  requestAnimationFrame(rafLoop);
+}
+rafLoop(); // 正常运行，每帧执行一次
+```
+
+执行顺序示例
+
+```javascript
+console.log('1');
+
+setTimeout(() => console.log('2'), 0);
+
+requestAnimationFrame(() => console.log('4'));
+
+Promise.resolve().then(() => console.log('3'));
+
+console.log('5');
+
+// 输出顺序: 1, 5, 3, 4, 2
+// 解释:
+// 1, 5 - 同步代码
+// 3 - 微任务
+// 4 - RAF (渲染阶段)
+// 2 - 宏任务
+```
+
+浏览器渲染流水线
+
+```
+Event Loop Tick:
+┌─────────────────┐
+│   执行 JS 代码   │
+├─────────────────┤
+│   执行微任务     │
+├─────────────────┤
+│   检查渲染需求   │ ← 如果需要渲染才继续
+├─────────────────┤
+│   RAF 回调      │ ← requestAnimationFrame
+├─────────────────┤
+│   样式计算       │
+├─────────────────┤
+│   布局 Layout    │
+├─────────────────┤
+│   绘制 Paint     │
+└─────────────────┘
+```
+
+
+
 #### performance.now()
 
 **`performance.now()`** 方法返回一个精确到毫秒的 [`DOMHighResTimeStamp`](https://developer.mozilla.org/zh-CN/docs/Web/API/DOMHighResTimeStamp)。
@@ -480,6 +571,12 @@ setImmediate(() => {
 通过上述流程的梳理，我们发现关键就在这个1毫秒，如果同步代码执行时间较长，进入Event Loop的时候1毫秒已经过了，`setTimeout`执行，如果1毫秒还没到，就先执行了`setImmediate`。
 
 每次我们运行脚本时，机器状态可能不一样，导致运行时有1毫秒的差距，一会儿`setTimeout`先执行，一会儿`setImmediate`先执行
+
+
+
+#### （5）Worker
+
+Worker线程中的任务有其特殊性，它们**不属于主线程的宏任务/微任务队列**，而是在**独立的事件循环**中执行。
 
 
 

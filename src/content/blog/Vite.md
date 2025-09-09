@@ -7,6 +7,7 @@ description: '打包工具相关'
 pinned: true
 ---
 
+
 ## Vite概述
 
 Webpack是前端使用最多的构建工具，但是除了webpack还有一些其他的构建工具，比如rollup、parcel、gulp、vite
@@ -37,9 +38,76 @@ Vite 所倡导的`no-bundle`理念的真正含义: **利用浏览器原生 ES �
 开发阶段：
 
 1. 使用esbuild进行了预构建
-2. esbuild本身的打包速度快
-3. 本身的no-bundle，懒加载
-4. 使用[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)，在开发阶段，将 Babel 替换为 SWC，冷启动和模块热替换（HMR）将会有显著提升
+``` javascript
+// vite.config.js
+export default {
+  optimizeDeps: {
+    // Vite 会预构建这些依赖，转换为 ES Modules
+    include: ['react', 'react-dom', 'lodash']
+  }
+}
+```
+1. esbuild本身的打包速度快
+2. 本身的no-bundle，懒加载
+3. 使用[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)，在开发阶段，将 Babel 替换为 SWC，冷启动和模块热替换（HMR）将会有显著提升
+4. 直接使用ES Module
+ 传统打包模式（如 Webpack）
+
+``` javascript
+// 开发时的流程：  
+源代码 → 打包工具分析 → 编译转换 → 打包成bundle → 浏览器加载bundle  
+  
+// 例如你写的代码：  
+// main.js  
+import { utils } from './utils.js'  
+import { Component } from './Component.js'  
+  
+// Webpack 会把这些打包成：  
+// bundle.js (一个大文件包含所有代码)
+
+```
+ Vite 的 ES Modules 模式
+
+```javascript
+// 开发时的流程：  
+源代码 → 直接发送给浏览器 → 浏览器原生解析 import  
+  
+// 你写的代码：  
+// main.js  
+import { utils } from './utils.js'        // 浏览器发起 HTTP 请求获取 utils.js  
+import { Component } from './Component.js' // 浏览器发起 HTTP 请求获取 Component.js  
+  
+// 浏览器直接执行，无需预先打包
+```
+
+
+### Vite 的 ES Modules 模式
+
+javascript
+
+// 开发时的流程：  
+源代码 → 直接发送给浏览器 → 浏览器原生解析 import  
+  
+// 你写的代码：  
+// main.js  
+import { utils } from './utils.js'        // 浏览器发起 HTTP 请求获取 utils.js  
+import { Component } from './Component.js' // 浏览器发起 HTTP 请求获取 Component.js  
+  
+// 浏览器直接执行，无需预先打包
+
+### 2. **冷启动速度优势**
+
+```javascript
+// Webpack 冷启动流程  
+1. 分析依赖图 → 2. 打包所有文件 → 3. 启动开发服务器  
+   (可能需要几十秒)  
+  
+// Vite 冷启动流程    
+2. 启动开发服务器 → 2. 按需编译  
+   (通常几百毫秒)
+```
+
+
 
 生产环境：
 

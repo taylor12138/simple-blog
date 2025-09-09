@@ -323,8 +323,29 @@ template模板
 主要解决 / 用于
 
 1. dom树建立时能够实现维护自身边界的问题。这么说有点像vue的scope保证自身不会被外来修饰入侵或者污染。
+
+   样式隔离
+
+   ```javascript
+   // Shadow DOM 内的样式不会影响外部
+   shadowRoot.innerHTML = `
+     <style>
+       p { color: red; font-size: 20px; }
+     </style>
+     <p>这个样式只影响 Shadow DOM 内部</p>
+   `;
+   ```
+
 2. 影子dom将对应的dom信息隐藏起来依然能在html文档里渲染出来。但不能通过**普通的js方法**获取到dom信息
+
 3. 影子dom事件捕获遵从常规dom事件，在影子dom内部依然传递，同时也遵从事件冒泡，向整个文档的dom上传递事件。
+
+4. 避免命名冲突
+
+   ```
+   // 外部有 id="title"，Shadow DOM 内部也可以有 id="title"
+   // 它们不会冲突
+   ```
 
 mode：该引用是否可以被获取，open/closed，一般没人选closed
 
@@ -365,7 +386,7 @@ document.body.innerHTML = `
         <p>Foo</p>  
       </div>
     `;
-document.querySelector('div')
+document.querySelector('#foo')
     .attachShadow({ mode: 'open' })
     .innerHTML = `
       <div id="bar">
@@ -383,6 +404,43 @@ document.querySelector('div')
         <p>Foo</p>
     </div>
 </div>
+```
+
+
+
+或者这样创建
+
+```js
+class GreetingCard extends HTMLElement {
+    constructor() {
+        super();
+        
+        const shadow = this.attachShadow({ mode: 'open' });
+        
+        shadow.innerHTML = `
+            <style>
+                .card {
+                    border: 2px solid #333;
+                    border-radius: 10px;
+                    padding: 20px;
+                    background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+                    max-width: 300px;
+                }
+                .title {
+                    color: #333;
+                    font-size: 24px;
+                    margin-bottom: 10px;
+                }
+            </style>
+            <div class="card">
+                <h2 class="title">问候卡片</h2>
+                <slot name="content">默认内容</slot>
+            </div>
+        `;
+    }
+}
+
+customElements.define('greeting-card', GreetingCard);
 ```
 
 
@@ -531,7 +589,7 @@ navigator.sendBeacon(url, 请求参数)
 
 ## 第26章（模块）
 
-ES6模块是作为一整块JavaScript代码而存在的，带有 `type-"module"`属性的 script标签会告诉浏览器相关代码应该作为模块来执行
+ES6模块是作为一整块JavaScript代码而存在的，带有 `type="module"`属性的 script标签会告诉浏览器相关代码应该作为模块来执行
 
 ```html
 <script type="module" src="xxxx"></script>
@@ -540,6 +598,24 @@ ES6模块是作为一整块JavaScript代码而存在的，带有 `type-"module"`
 与传统JavaScript处理方式不同，所有模块都会像 `<scirpt defer>` 加载脚本一样按照顺序执行，解析到 `<script type="module">` 标签后会立即下载模块文件，但执行会延迟到文档解析完成。
 
 所以模块标签的位置之只决定了文件什么时候加载，并不会影响哪个模块什么时候加载
+
+**特点：**
+
+- 启用 ES6 模块系统
+- 支持 `import` 和 `export` 语句
+- 默认采用严格模式（strict mode）
+- 默认延迟执行（defer 行为）
+- 具有独立的作用域，不会污染全局作用域
+- 支持顶级 `await`
+
+执行时机对比
+
+| 属性            | 下载时机 | 执行时机       | 执行顺序   |
+| :-------------- | :------- | :------------- | :--------- |
+| 默认            | 阻塞解析 | 立即执行       | 按顺序     |
+| `defer`         | 并行下载 | DOM解析完成后  | 按顺序     |
+| `async`         | 并行下载 | 下载完成后立即 | 不保证顺序 |
+| `type="module"` | 并行下载 | DOM解析完成后  | 按依赖关系 |
 
 
 

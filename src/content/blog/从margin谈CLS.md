@@ -38,6 +38,7 @@ description: 'css相关'
 没有内容将父元素和后代元素分开：
 
 - 如果没有设定边框（border）、内边距（padding）、行级（inline）内容，也没有创建[区块格式化上下文](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_display/Block_formatting_context)（BFC）或[*间隙*](https://developer.mozilla.org/zh-CN/docs/Web/CSS/clear)来分隔块级元素的上边距 （margin-top） 与其内一个或多个子代块级元素的上边距 （margin-top）；
+  - BFC可以理解为房子里的一个**隔断房间**，内部 / 外部 样式不会相互影响
 - 或者没有设定边框、内边距、行级内容、高度或最小高度来分隔块级元素的下边距与其内部的一个或多个后代后代块元素的下边距，则会出现这些外边距的折叠，重叠部分最终会溢出到父代元素的外面。
 
 空的区块：

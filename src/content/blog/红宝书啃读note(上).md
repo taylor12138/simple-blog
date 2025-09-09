@@ -19,18 +19,108 @@ console.log("<\/script>")
 
 可以使用async代替 DOMContentLoaded事件进行 异步操作（并不是所有浏览器都支持async），使得页面保证dom渲染完毕后再执行js文件，只是不能保证执行次序
 
-defer只对外部脚本有效，按照加载顺序执行脚本的，这一点要善加利用
+- [`async`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Reference/Elements/script#async)
 
-async不能保证多个script标签事件执行的顺序，**加载完了就会立刻执行**
+  对于普通脚本，如果存在 `async` 属性，那么普通脚本会被并行请求，并尽快解析和执行。
 
-noscript标签：当浏览器禁用JavaScript，或者对脚本的支持关闭时可以使用
+  对于[模块脚本](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules)，如果存在 `async` 属性，那么脚本及其所有依赖都会在延缓队列中执行，因此它们会被并行请求，并尽快解析和执行。
+
+  该属性能够消除**解析阻塞的 Javascript**。解析阻塞的 Javascript 会导致浏览器必须加载并且执行脚本，之后才能继续解析。`defer` 在这一点上也有类似的作用
+
+  对于DOMContentLoaded的 **两种情况**：
+
+  1. **async 脚本在 DOM 解析完成前执行完**：不影响 DOMContentLoaded
+  2. **async 脚本在 DOM 解析完成后还在执行**：DOMContentLoaded 正常触发
+
+- defer只对外部脚本有效，按照加载顺序执行脚本的，这一点要善加利用。包含 `defer` 属性的脚本将阻塞 `DOMContentLoaded` 事件触发
+
+- async不能保证多个script标签事件执行的顺序，**加载完了就会立刻执行**
+
+- noscript标签：当浏览器禁用JavaScript，或者对脚本的支持关闭时可以使用
 
 ```js
 <script async src="xxxx"> </script>
 <script defer src="xxxx"> </script>
 ```
 
-![](/simple-blog/红宝书啃读note/defer.jpg)
+![](/simple-blog/红宝书啃读note/defer.png)
+
+
+
+一个生动的例子区别 async 和 defer
+
+**普通 script**
+
+**阻塞式加载**：
+
+1. 遇到 script 标签，停止 HTML 解析
+2. 下载并执行 JavaScript
+3. 执行完毕后继续解析 HTML
+4.  HTML解析 完成后触发 DOMContentLoaded
+
+```
+HTML解析 ——————————————————————————————————
+         ↓ 暂停
+         JS下载+执行
+                   ↓ 继续
+                   HTML解析 ——————————————
+```
+
+**async script**
+
+- **并行工作**：HTML 解析和 JS 下载同时进行
+- **随时打断**：JS 下载完立即执行，暂停 HTML 解析
+- **无序执行**：多个 async 脚本按下载完成顺序执行
+-  HTML解析 完成后触发 DOMContentLoaded
+
+```
+HTML解析 ——————————————————————————————————
+JS下载   ——————————————
+                ↓ 下载完立即执行（暂停HTML）
+                JS执行
+                     ↓ 继续
+                     HTML解析 ——————————
+```
+
+**defer script**
+
+- **后台准备**：HTML 解析时，JS 在后台下载
+- **按序登场**：等 HTML 解析完毕，按顺序执行
+- **尊重顺序**：严格按照在 HTML 中的顺序执行
+-  HTML解析  + defer script 完成后触发 DOMContentLoaded
+
+```
+HTML解析 ——————————————————————————————————
+JS下载   ——————————————————————————————————
+                                        ↓ HTML解析完后执行
+                                        JS执行
+```
+
+**马戏团表演比喻总结**
+
+**普通 script**：
+
+- 像**独角戏**，一个演员表演时，观众和其他演员都要等待
+
+**async**：
+
+- 像**即兴表演**，准备好就立即上台，可能打乱节目顺序
+
+**defer**：
+
+- 像**正式演出**，所有演员后台准备，按节目单顺序登场
+
+
+
+**DOMContentLoaded** 
+
+DOMContentLoaded就像房屋的**主体结构完工**：
+
+- 墙体、框架都搭建完成（DOM 树构建完成）
+- 但装修、家具还没完成（CSS、图片等外部资源）
+- 可以开始进行室内工作了（可以操作 DOM）
+
+
 
 
 
@@ -142,6 +232,12 @@ let oldValue = -64
 let newValue = oldValue >>> 5; //得到134217726
 ```
 
+**位移运算** 就像**数字的搬家**：
+
+- **`<<` 左移**：向豪华区搬家，身价翻倍（乘以2的n次方）
+- **`>>` 有符号右移**：向平民区搬家，但保持身份（正负性不变）
+- **`>>>` 无符号右移**：完全重新开始，不管之前身份
+
 
 
 **加性操作符**
@@ -188,15 +284,16 @@ let a = 1 + '1'; // "11"
 
 **break & continue**
 
-break和continue都可以使用标签语句退出多重循环
+break和continue都可以使用标签语句退出多重循环（这里的outermost 是可以自定义命名）
 
 ```js
-let num = 0;
-outermost:
-for(let i = 0; i < 10; i++){
-	for(let j = 0; j < 10; j++){
-        if(i === 5 && j === 5)break outermost;
-        num++;
+outermost: for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+        if (i === 5 && j === 5) {
+            console.log('break');
+            break outermost;
+        }
+        console.log(i, j);
     }
 }
 ```
@@ -205,7 +302,7 @@ for(let i = 0; i < 10; i++){
 
 ## 第4章（变量、作用域与内存）
 
-原始类型初始化可以只是永远是字面量形式，如果是使用new关键字创建，则JavaScript会创建爱一个Object实例，其行为类似原始值
+原始类型初始化可以只是永远是字面量形式，如果是使用new关键字创建，则JavaScript会创建一个Object实例，其行为类似原始值
 
 比如
 
@@ -423,6 +520,10 @@ func();
 
 
 [Eval 和 new Function 对比](https://weblogs.asp.net/yuanjian/json-performance-comparison-of-eval-new-function-and-json)
+
+总结：
+
+> Genally speaking, eval is better than new Function,though they have different results in different browsers. But the "new Function" is the double performance of eval in Firefox, so we wrap a class to parse json string to gain better performance in cross-browser.
 
 
 
@@ -697,7 +798,7 @@ another.sayHi();
 
 
 
-传统的组合继承也存在效率问题，主要在于父类构造函数始终会被调用两次，
+传统的**组合继承**也存在效率问题，主要在于父类构造函数始终会被调用两次，
 
 一次在创建子类原型时调用（`Son.prototype = new Father();`）
 
@@ -836,24 +937,74 @@ console.log(proxy.id);   //TypeError
 ```js
 const hiddenProperties = ['foo', 'bar'];
 const target = {
-  foo: 1,
-  bar: 2,
-  baz:3
+    foo: 1,
+    bar: 2,
+    baz: 3
 }
+
 const proxy = new Proxy(target, {
-  //隐藏属性功能
-  get(target, property) {
-    if (hiddenProperties.includes(property))
-      return undefined;
-    else return Reflect.get(...arguments);
-  },
-    //属性验证
-  set(target, property, value) {
-    if (typeof value !== Number) return false;//拒绝赋值
-    else return Reflect.set(...arguments);
-  }
-})
+    get(target, property) {
+        if (hiddenProperties.includes(property))
+            return undefined;
+        else return Reflect.get(...arguments);
+    },
+    
+    set(target, property, value) {
+        if (typeof value !== 'number') return false;
+        else return Reflect.set(...arguments);
+    }
+});
+
+console.log(proxy.foo); // undefined (被隐藏)
+console.log(proxy.baz); // 3
+proxy.baz = 'string';   // 设置失败，因为不是数字
+console.log(proxy.baz); // 仍然是 3
 ```
+
+1. **与 Proxy 配合使用**
+
+`Reflect` 的方法签名与 `Proxy` 处理器完全匹配，可以轻松地调用默认行为：
+
+```javascript
+get(target, property) {
+    if (hiddenProperties.includes(property))
+        return undefined;
+    else return Reflect.get(...arguments); // 调用默认的 get 行为
+}
+```
+
+2. **提供统一的对象操作API**
+
+`Reflect` 将对象操作统一为函数调用形式：
+
+```javascript
+// 传统方式 vs Reflect 方式
+obj.prop           // Reflect.get(obj, 'prop')
+obj.prop = value   // Reflect.set(obj, 'prop', value)
+delete obj.prop    // Reflect.deleteProperty(obj, 'prop')
+'prop' in obj      // Reflect.has(obj, 'prop')
+```
+
+3. **更好的错误处理**
+
+`Reflect` 方法返回布尔值表示操作是否成功，而不是抛出异常：
+
+```javascript
+// 你的例子中的 set 处理器
+set(target, property, value) {
+    if (typeof value !== 'number') return false; // 注意：应该是 'number' 而不是 Number
+    else return Reflect.set(...arguments); // 返回 true/false 表示是否成功
+}
+```
+
+Reflect 的优势
+
+1. **函数式编程风格**：所有操作都是函数调用
+2. **更可靠的返回值**：返回布尔值而不是抛出异常
+3. **与 Proxy 完美配合**：方法签名完全匹配
+4. **更清晰的代码**：明确表达操作意图
+
+
 
 
 
