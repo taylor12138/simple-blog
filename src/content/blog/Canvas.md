@@ -1284,6 +1284,172 @@ pixi的ticker使用的是requestAnimationFrame 向下兼容 setinterval，但是
 ![](/simple-blog/Canvas/low2.png)
 
 所以我们也可以通过每次执行ticker拿到performance.now去做timestamp的换算，去做动画
+```javascript
+const deltaTime = currentTime - lastTime;
+const distance = animationSpeed * deltaTime;
+```
+
+在低端机上的实践建议
+对于低端设备，我推荐这种混合方法，它结合了两种方式 (raf + performance.now()) 的优点：
+
+```javascript
+let lastTimestamp = null;
+let lastUpdateTime = null;
+
+function animate(timestamp) {
+    // 使用 rAF 的时间戳作为主要基准
+    if (!lastTimestamp) lastTimestamp = timestamp;
+    const frameDelta = timestamp - lastTimestamp;
+    lastTimestamp = timestamp;
+    
+    // 但对于非常不稳定的情况，添加一个最大限制
+    const clampedDelta = Math.min(frameDelta, 100); // 最大100ms，避免跳跃过大
+    
+    // 计算基于时间的变化
+    const distance = animationSpeed * clampedDelta;
+    
+    // 更新动画状态
+    updateAnimation(distance);
+    
+    requestAnimationFrame(animate);
+}
+```
+或者更高级的方法 - 自适应动画：
+
+```javascript
+function animate(timestamp) {
+    if (!lastTimestamp) lastTimestamp = timestamp;
+    const deltaTime = timestamp - lastTimestamp;
+    lastTimestamp = timestamp;
+    
+    // 检测性能：如果帧间隔异常大，说明设备性能低下
+    if (deltaTime > 34) { // 低于~30fps
+        // 启用简化动画模式
+        enableLowQualityAnimation();
+        // 可以降低动画精度或减少计算量
+        const simplifiedDistance = animationSpeed * deltaTime * 0.7;
+        updateAnimation(simplifiedDistance);
+    } else {
+        // 正常动画模式
+        const distance = animationSpeed * deltaTime;
+        updateAnimation(distance);
+    }
+    
+    requestAnimationFrame(animate);
+}
+```
+
+还有一个高级方法：
+自适应帧率控制
+
+```javascript
+class AdaptiveFrameController {
+  constructor(targetFPS = 60) {
+    this.targetFPS = targetFPS;
+    this.targetFrameTime = 1000 / targetFPS; // 16.67ms for 60fps
+    this.lastFrameTime = 0;
+    this.frameCount = 0;
+    this.fpsHistory = [];
+    this.adaptiveTargetFPS = targetFPS;
+  }
+
+  shouldRender(currentTime) {
+    const deltaTime = currentTime - this.lastFrameTime;
+    
+    // 检查是否达到目标帧间隔
+    if (deltaTime >= (1000 / this.adaptiveTargetFPS)) {
+      this.lastFrameTime = currentTime;
+      this.updateFPSStats(deltaTime);
+      return true;
+    }
+    return false;
+  }
+
+  updateFPSStats(deltaTime) {
+    const currentFPS = 1000 / deltaTime;
+    this.fpsHistory.push(currentFPS);
+    
+    // 保持最近30帧的记录
+    if (this.fpsHistory.length > 30) {
+      this.fpsHistory.shift();
+    }
+    
+    // 每30帧调整一次目标帧率
+    if (this.fpsHistory.length === 30) {
+      this.adaptFrameRate();
+    }
+  }
+
+  adaptFrameRate() {
+    const avgFPS = this.fpsHistory.reduce((a, b) => a + b) / this.fpsHistory.length;
+    
+    if (avgFPS < 45) {
+      // 设备性能较低，降低到30fps
+      this.adaptiveTargetFPS = 30;
+    } else if (avgFPS < 55) {
+      // 中等性能，45fps
+      this.adaptiveTargetFPS = 45;
+    } else {
+      // 高性能设备，60fps
+      this.adaptiveTargetFPS = 60;
+    }
+    
+    console.log(`自适应帧率调整为: ${this.adaptiveTargetFPS}fps (当前平均: ${avgFPS.toFixed(1)}fps)`);
+  }
+}
+```
+实际应用示例
+```javascript
+class SmoothAnimation {
+  constructor() {
+    this.frameController = new AdaptiveFrameController(60);
+    this.position = 0;
+    this.velocity = 2;
+    this.isRunning = false;
+  }
+
+  start() {
+    this.isRunning = true;
+    this.animate();
+  }
+
+  animate = (timestamp) => {
+    if (!this.isRunning) return;
+
+    // 只在合适的时机渲染
+    if (this.frameController.shouldRender(timestamp)) {
+      this.update();
+      this.render();
+    }
+
+    requestAnimationFrame(this.animate);
+  }
+
+  update() {
+    // 基于时间的动画，而不是基于帧
+    const deltaTime = 1000 / this.frameController.adaptiveTargetFPS;
+    this.position += this.velocity * (deltaTime / 16.67); // 标准化到60fps
+    
+    if (this.position > 300) {
+      this.position = 0;
+    }
+  }
+
+  render() {
+    const element = document.getElementById('animated-box');
+    if (element) {
+      element.style.transform = `translateX(${this.position}px)`;
+    }
+  }
+}
+```
+
+##### **但是实际上**
+执行时间的波动：正如上一个问题所解释的，performance.now() 获取的是代码执行到那一行的精确时刻。JavaScript 是单线程的，你的 animate 函数不可能总是在每一帧的完全相同的时刻被调用。可能因为其他任务（垃圾回收、其他事件处理）而稍有延迟。
+
+与渲染不同步：你计算出的 distanceToMove 是基于函数执行的真实耗时，但这个耗时可能和屏幕的理想刷新间隔（如 16.7ms）并不匹配。浏览器会尽力将 rAF 回调对齐到帧开始，但内部执行时间总有微秒级的波动。
+
+后果：你基于一个波动的、不稳定的 deltaTime 来计算移动距离，会导致动画产生微小的、可见的抖动（Jitter）。虽然方块的平均速度是 200px/s，但每一帧的移动距离都不完全均匀，看起来就不平滑。
 
 **无法滑动问题**
 

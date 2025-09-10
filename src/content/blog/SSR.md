@@ -296,6 +296,123 @@ hydrateRoot(document.getElementById('root'), <App />);
 3. **渐进增强**：即使JS加载失败，用户也能看到基本内容
 
 
+###  水合的核心步骤
+
+ 1. **DOM 对比 (Reconciliation)**
+
+```javascript
+// 水合开始时，React 会对比：  
+现有 DOM (服务端生成的静态 HTML)  
+vs  
+虚拟 DOM (客户端 React 组件树)  
+  
+// 例如：  
+// 静态 HTML: <button>增加</button>  
+// 虚拟 DOM: <button onClick={handleClick}>增加</button>
+```
+
+
+ 2.**事件绑定**
+
+```javascript
+// 水合过程中，React 会：  
+document.getElementById('root').querySelector('button')  
+// 给这个已存在的 DOM 元素绑定事件处理器  
+button.addEventListener('click', handleClick)
+```
+
+3.**状态初始化**
+
+```javascript
+// 组件状态被初始化  
+const [count, setCount] = useState(0); // 初始值 0  
+// React 会检查 DOM 中显示的是否也是 0
+```
+
+React 17 的 
+ReactDOM.hydrate
+```javascript
+ReactDOM.hydrate(
+  <App />,                    // React 组件
+  document.getElementById('root')  // 目标 DOM 容器
+);
+
+// 内部逻辑：
+1. 创建 React Fiber 树
+2. 与现有 DOM 进行对比
+3. 绑定事件处理器
+4. 初始化组件状态
+5. 标记为已水合
+```
+React 18 的 ReactDOM.hydrateRoot
+（注意 服务端流式渲染 (renderToPipeableStream) 和 客户端流式水合 (hydrateRoot) 是两个不同层面的流式技术，可以独立使用。）
+```javascript
+const root = ReactDOM.hydrateRoot(
+  document.getElementById('root'),  // 目标 DOM 容器
+  <App />                         // React 组件
+);
+
+// 新特性：
+1. 支持并发特性 (Concurrent Features)
+2. 支持 Suspense 边界
+3. 更好的错误处理
+4. 流式水合 (Streaming Hydration)
+```
+
+React 18 的流式水合
+传统水合：
+```javascript
+// 必须等待整个页面 JavaScript 加载完成
+HTML 加载 → JS 加载完成 → 一次性水合整个页面
+```
+流式水合：
+```javascript
+// 可以分块水合
+HTML 加载 → 
+部分 JS 加载 → 水合可见部分 →
+更多 JS 加载 → 水合其他部分 →
+...
+```
+并发水合的工作原理， 在sunspense内会延迟水合
+```javascript
+// React 18 的选择性水合
+function App() {
+  return (
+    <div>
+      <Header />  {/* 立即水合 */}
+      <Suspense fallback={<Loading />}>
+        <HeavyComponent />  {/* 延迟水合 */}
+      </Suspense>
+      <Footer />  {/* 立即水合 */}
+    </div>
+  );
+}
+
+// 用户点击 HeavyComponent 时，React 会优先水合它
+```
+除了suspense之外，还有其他特定的组件的也会延迟水合
+1. Suspense 边界
+2. 用户交互（点击、滚动等）
+3. 代码分割的组件
+4. 延迟加载的组件
+
+水合不匹配的处理
+```javascript
+// React 检测到不匹配时的处理
+function handleHydrationMismatch(domElement, reactElement) {
+  if (process.env.NODE_ENV === 'development') {
+    console.warn(
+      'Warning: Text content did not match. Server: "%s" Client: "%s"',
+      domElement.textContent,
+      reactElement.props.children
+    );
+  }
+  
+  // 客户端接管，重新渲染
+  domElement.textContent = reactElement.props.children;
+}
+```
+
 ### SSG demo
 src/App.js → 构建工具转换 → {
   服务端版本（用于 renderToString）

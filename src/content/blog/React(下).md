@@ -1407,8 +1407,47 @@ https://segmentfault.com/a/1190000020108840
 
 
 
-React18：
+### React18：
 
+####  1. 并发渲染 (Concurrent Rendering)
+
+ 核心概念
+
+并发渲染允许 React 在渲染过程中**中断、暂停和恢复**工作，优先处理更重要的更新。
+```javascript
+// React 17: 同步渲染（阻塞式）  
+function App() {  
+  const [count, setCount] = useState(0);  
+    
+  // 点击按钮时，必须等待整个组件树渲染完成  
+  const handleClick = () => setCount(count + 1);  
+    
+  return (  
+    <div>  
+      <button onClick={handleClick}>Count: {count}</button>  
+      <ExpensiveList /> {/* 阻塞渲染 */}  
+    </div>  
+  );  
+}  
+  
+// React 18: 并发渲染（可中断）  
+function App() {  
+  const [count, setCount] = useState(0);  
+    
+  // 用户交互优先级更高，可以中断 ExpensiveList 的渲染  
+  const handleClick = () => setCount(count + 1);  
+    
+  return (  
+    <div>  
+      <button onClick={handleClick}>Count: {count}</button>  
+      <ExpensiveList /> {/* 可被中断 */}  
+    </div>  
+  );  
+}
+```
+
+
+#### 2. 批处理
 从带有 `createRoot` 的 React 18 开始，所有更新都将自动批处理，无论它们来自何处。（也就是说不用我们自己）
 
  这意味着`timeouts`、`promises`、`native events`处理程序或任何其他事件内的更新将以与 React 事件内的更新相同的方式进行批处理。我们希望这会导致更少的渲染工作，从而在您的应用程序中获得更好的性能
@@ -1438,8 +1477,105 @@ function handleClick() {
 
 这个 API 在 18 中仍然存在，但不再需要它了，因为批处理是自动发生的。我们不会在 18 中删除它，尽管在流行的库不再依赖于它的存在之后，它可能会在未来的主要版本中被删除。
 
-https://juejin.cn/post/6998763055685304356
+#### 3. Suspense 增强
+ 数据获取支持
 
+```javascript
+// React 18 支持 Suspense 用于数据获取  
+function ProfilePage() {  
+  return (  
+    <Suspense fallback={<Loading />}>  
+      <Profile />  
+      <Posts />  
+    </Suspense>  
+  );  
+}  
+  
+function Profile() {  
+  // 这可以是异步数据获取  
+  const user = use(fetchUser()); // React 18 的 use hook  
+  return <div>{user.name}</div>;  
+}
+
+```
+
+#### 4. 流式ssr增强
+流式 SSR 支持
+```javascript
+// 服务端  
+import { renderToPipeableStream } from 'react-dom/server';  
+  
+const { pipe } = renderToPipeableStream(<App />, {  
+  onShellReady() {  
+    // 页面框架准备好，开始流式传输  
+    pipe(response);  
+  }  
+});  
+  
+// 客户端自动支持流式水合  
+const root = ReactDOM.hydrateRoot(container, <App />);
+```
+
+#### 5. 新Hooks
+比如
+useTransition 是 React 18 中用来区分紧急更新和非紧急更新的 Hook
+紧急更新（高优先级）
+用户直接交互：点击、输入、滚动
+需要立即响应，否则用户会感觉卡顿
+非紧急更新（低优先级）
+数据展示、搜索结果、复杂计算
+可以稍微延迟，不会影响用户体验
+实际场景示例
+场景 1：搜索功能
+```javascript
+function SearchApp() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSearch = (value) => {
+    // 紧急更新：立即更新输入框
+    setQuery(value);
+    
+    // 非紧急更新：搜索结果可以延迟
+    startTransition(() => {
+      const searchResults = expensiveSearch(value); // 耗时操作
+      setResults(searchResults);
+    });
+  };
+
+  return (
+    <div>
+      <input 
+        value={query}
+        onChange={e => handleSearch(e.target.value)}
+        placeholder="搜索..."
+      />
+      {isPending && <div>搜索中...</div>}
+      <SearchResults results={results} />
+    </div>
+  );
+}
+```
+效果对比：
+
+```javascript
+// ❌ 不使用 useTransition
+const handleSearch = (value) => {
+  setQuery(value);           // 紧急
+  setResults(expensiveSearch(value)); // 也被当作紧急
+  // 结果：输入框会卡顿，用户感觉不流畅
+};
+
+// ✅ 使用 useTransition  
+const handleSearch = (value) => {
+  setQuery(value);           // 紧急：立即更新
+  startTransition(() => {
+    setResults(expensiveSearch(value)); // 非紧急：可被中断
+  });
+  // 结果：输入框流畅，搜索结果稍后更新
+};
+```
 
 
 ## 14.React其他
@@ -1473,3 +1609,5 @@ export default function Dialog() {
 `StrictMode` 是一个用以标记出应用中潜在问题的工具。就像 `Fragment` ，`StrictMode` 不会渲染任何真实的UI。它为其后代元素触发额外的检查和警告。
 
 但是有个小坑：**React.StrictMode 多次调用问题，导致这个函数组件被调用了两次**。
+
+参考：https://juejin.cn/post/6998763055685304356
