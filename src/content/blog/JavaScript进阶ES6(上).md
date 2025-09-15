@@ -1141,7 +1141,7 @@ hd();
 
 
 #### 手写promise
-
+低版本 promise polyfill 也是这个实现方式
 函数体内部首先创建了常量 `that`，因为代码可能会异步执行，用于获取正确的 `this` 对象（即this一开始指向MyPromise，后面指向window）
 
 ```js
@@ -1150,25 +1150,25 @@ const RESOLVED = 'resolved'
 const REJECTED = 'rejected'
 
 function MyPromise(fn) {
-    const that = this //此时this指向MyPromise
-    that.state = PENDING
-    that.value = null
-    that.resolvedCallbacks = []
-    that.rejectedCallbacks = []
+    const self = this //此时this指向MyPromise
+    self.state = PENDING
+    self.value = nullt
+    self.resolvedCallbacks = []
+    self.rejectedCallbacks = []
     // 待完善 resolve 和 reject 函数
     function resolve(value) {
         //此时this指向window
-        if (that.state === PENDING) {
-            that.state = RESOLVED
-            that.value = value
-            that.resolvedCallbacks.map(cb => cb(that.value))
+        if (self.state === PENDING) {
+            self.state = RESOLVED
+            self.value = value
+            self.resolvedCallbacks.map(cb => cb(self.value))
         }
     }
     function reject(value) {
-        if (that.state === PENDING) {
-            that.state = REJECTED
-            that.value = value
-            that.rejectedCallbacks.map(cb => cb(that.value))
+        if (self.state === PENDING) {
+            self.state = REJECTED
+            self.value = value
+            self.rejectedCallbacks.map(cb => cb(self.value))
         }
     }
     // 待完善执行 fn 函数
@@ -1181,7 +1181,7 @@ function MyPromise(fn) {
 // then方法
 MyPromise.prototype.then = function (onFulfilled, onRejected) {
     //实际上这里面的的this都指向MyPromise，甚至不换成that也行，但是为了美观和易读性都换成that
-    const that = this
+    const self = this
     onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v
     onRejected =
         typeof onRejected === 'function'
@@ -1189,15 +1189,15 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
     : r => {
         throw r
     }
-    if (that.state === PENDING) {
-        that.resolvedCallbacks.push(onFulfilled)
-        that.rejectedCallbacks.push(onRejected)
+    if (self.state === PENDING) {
+        self.resolvedCallbacks.push(onFulfilled)
+        self.rejectedCallbacks.push(onRejected)
     }
-    if (that.state === RESOLVED) {
-        onFulfilled(that.value)
+    if (self.state === RESOLVED) {
+        onFulfilled(self.value)
     }
-    if (that.state === REJECTED) {
-        onRejected(that.value)
+    if (self.state === REJECTED) {
+        onRejected(self.value)
     }
 }
 ```
@@ -1213,6 +1213,142 @@ new MyPromise((resolve, reject) => {
     console.log(value)
 })
 ```
+
+这里为什么要用self指代？
+
+```js
+function PromisePolyfill(executor) {
+  // 这里的 this 指向新创建的 Promise 实例
+  console.log(this); // PromisePolyfill { state: 'pending', ... }
+  
+  function resolve(value) {
+    // 但是这里的 this 可能不是 Promise 实例了！
+    console.log(this); // 可能是 undefined 或 global 对象
+    
+    // 如果直接用 this，会出错
+    // this.state = 'resolved'; // TypeError: Cannot set property 'state' of undefined
+  }
+}
+```
+
+#### promise嵌套
+当resolve传入一个Promise时，会发生Promise解包。
+
+Promise解包机制
+
+```js
+// 情况1：resolve传入普通值
+const promise1 = new Promise(resolve => {
+  resolve('hello');
+});
+
+promise1.then(value => {
+  console.log(value); // 输出: 'hello'
+});
+
+// 情况2：resolve传入一个Promise
+const innerPromise = new Promise(resolve => {
+  setTimeout(() => resolve('inner value'), 1000);
+});
+
+const outerPromise = new Promise(resolve => {
+  resolve(innerPromise); // 传入一个Promise
+});
+
+outerPromise.then(value => {
+  console.log(value); // 输出: 'inner value' (不是Promise对象!)
+});
+```
+
+关键点：Promise会被自动解包
+
+```js
+// 更复杂的例子
+const promise1 = Promise.resolve('第一层');
+const promise2 = Promise.resolve(promise1);
+const promise3 = Promise.resolve(promise2);
+
+promise3.then(value => {
+  console.log(value); // 输出: '第一层'
+  console.log(typeof value); // 输出: 'string'
+});
+
+// 即使嵌套多层Promise，最终都会解包到最内层的值
+```
+异步解包示例
+```js
+const asyncPromise = new Promise(resolve => {
+  setTimeout(() => {
+    resolve('异步结果');
+  }, 2000);
+});
+
+const wrapperPromise = new Promise(resolve => {
+  resolve(asyncPromise); // resolve一个异步Promise
+});
+
+wrapperPromise.then(value => {
+  console.log('2秒后输出:', value); // 输出: '异步结果'
+});
+```
+rejected状态的处理
+```js
+const rejectedPromise = Promise.reject('错误信息');
+
+const wrapperPromise = new Promise(resolve => {
+  resolve(rejectedPromise); // resolve一个rejected的Promise
+});
+
+wrapperPromise
+  .then(value => {
+    console.log('不会执行到这里');
+  })
+  .catch(error => {
+    console.log('捕获错误:', error); // 输出: '捕获错误: 错误信息'
+  });
+```
+
+与thenable对象的交互
+```js
+// thenable对象也会被解包
+const thenable = {
+  then(resolve, reject) {
+    setTimeout(() => resolve('thenable值'), 1000);
+  }
+};
+
+const promise = new Promise(resolve => {
+  resolve(thenable);
+});
+
+promise.then(value => {
+  console.log(value); // 输出: 'thenable值'
+});
+```
+实际应用场景
+```js
+// 常见的链式调用场景
+function fetchUser(id) {
+  return new Promise(resolve => {
+    // 这里可能返回另一个Promise
+    if (id === 'cached') {
+      resolve(Promise.resolve({ name: '缓存用户' }));
+    } else {
+      resolve(fetch(`/api/users/${id}`).then(res => res.json()));
+    }
+  });
+}
+
+fetchUser('cached').then(user => {
+  console.log(user); // 直接得到用户对象，不是Promise
+});
+```
+总结
+- 当Promise.resolve()或构造函数中的resolve()传入一个Promise时：
+- 外层Promise会等待内层Promise完成
+- then回调接收到的是内层Promise的resolved值
+- 如果内层Promise被rejected，外层Promise也会被rejected
+- 这个过程是递归的，会一直解包到非Promise值
 
 
 

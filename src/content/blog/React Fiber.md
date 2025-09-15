@@ -290,6 +290,42 @@ fiber出现之前的React 处理一次 setState()（首次渲染）时会有两�
 
 Windows 系统中线程轮转时间也就是时间片大约是20ms，如果某个线程所需要的时间小于20ms，那么不到20ms就会切换到其他线程;如果一个线程所需的时间超过20ms，系统也最多只给20ms，除非意外发生(那可能导致整个系统无响应)，而Linux/unix中则是5~800ms。
 
+```javascript
+// React 18 的优先级等级
+const PriorityLevels = {
+  ImmediatePriority: 1,        // 同步，不可中断 (onClick)
+  UserBlockingPriority: 2,     // 用户交互 (input, hover)  
+  NormalPriority: 3,           // 普通更新 (网络请求结果)
+  LowPriority: 4,              // 低优先级 (分析统计)
+  IdlePriority: 5              // 空闲时执行 (预加载)
+};
+
+// 优先级中断示例
+function interruptLowPriorityWork() {
+  // 正在执行低优先级渲染
+  while (workInProgress !== null) {
+    performUnitOfWork(workInProgress); // 渲染列表项1
+    
+    // 突然来了高优先级更新 (用户点击)
+    if (hasHigherPriorityWork()) {
+      // 中断当前工作，保存进度
+      const interruptedWork = workInProgress;
+      workInProgress = null;
+      
+      // 处理高优先级任务
+      processHighPriorityUpdate();
+      
+      // 稍后恢复低优先级工作
+      scheduleCallback(LowPriority, () => {
+        workInProgress = interruptedWork;
+        workLoopConcurrent();
+      });
+      break;
+    }
+  }
+}
+
+```
 
 
 #### React16架构

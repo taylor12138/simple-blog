@@ -609,5 +609,47 @@ BFC：块级格式化上下文，我个人理解的是一种规则
 - display为inline-block, table-cell, table-caption, flex, inline-flex
 - overflow不为visible
 
+**BFC的比喻**
+
+BFC就像一个"独立的房间"
+想象一下，BFC就像是一个有独立规则的房间：
+
+```css
+/* 创建BFC的方式 */
+.bfc-container {
+  overflow: hidden;  /* 像给房间装了门，内外隔离 */
+  /* 或者 display: flow-root; */
+  /* 或者 float: left; */
+  /* 或者 position: absolute; */
+}
+```
+
+BFC房间的特殊规则：
+
+内部的家具（元素）不会跑到房间外面
+```html
+<div class="bfc-container">
+  <div style="float: left;">浮动的沙发</div>
+  <div style="float: right;">浮动的桌子</div>
+  <!-- 父容器会包含这些浮动元素，不会塌陷 -->
+</div>
+```
+房间内的margin不会和外面的margin合并
+```html
+<div class="outer">
+  <div class="bfc-container">
+    <div style="margin: 20px;">房间内的椅子</div>
+  </div>
+</div>
+<!-- 椅子的margin不会和外面的元素发生重叠 */
+```
+房间会避开外面的障碍物
+```html
+<div style="float: left; width: 100px;">路边的电线杆</div>
+<div class="bfc-container">
+  这个房间会自动避开电线杆，不会被遮挡
+</div>
+```
+
 https://segmentfault.com/a/1190000013023485 这个网址里面又生成BFC的小案例，很有趣，可以加深理解
 

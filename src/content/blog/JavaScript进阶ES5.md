@@ -1316,3 +1316,92 @@ var a = 2;
 bar(); //3
 ```
 
+作用域链 (Scope Chain)
+作用域链是JavaScript引擎查找变量的机制，当访问一个变量时，会按照以下顺序查找：
+
+```js
+var global = 'global';
+
+function outer() {
+  var outerVar = 'outer';
+  
+  function middle() {
+    var middleVar = 'middle';
+    
+    function inner() {
+      var innerVar = 'inner';
+      
+      // 查找顺序：inner -> middle -> outer -> global
+      console.log(innerVar);  // 在当前作用域找到
+      console.log(middleVar); // 向上一层查找
+      console.log(outerVar);  // 向上两层查找
+      console.log(global);    // 向上三层查找到全局
+    }
+    
+    inner();
+  }
+  
+  middle();
+}
+
+outer();
+```
+
+内存存储：栈还是堆？
+答案：主要在栈中，但涉及闭包时会在堆中
+
+1. 执行上下文栈 (Call Stack)
+```javascript
+function first() {
+  var a = 1;
+  second();
+}
+
+function second() {
+  var b = 2;
+  third();
+}
+
+function third() {
+  var c = 3;
+  console.log('执行中...');
+}
+
+first();
+
+// 调用栈状态：
+// |  third()  | <- 栈顶
+// |  second() |
+// |  first()  |
+// |  global   | <- 栈底
+```
+
+闭包的特殊情况
+当涉及闭包时，作用域链的引用会保存在堆内存中：
+
+```javascript
+function createCounter() {
+  let count = 0; // 这个变量会保存在堆中
+  
+  return function() {
+    count++; // 闭包引用外部变量
+    return count;
+  };
+}
+
+const counter = createCounter();
+// counter函数保持对count变量的引用
+// count变量不会被垃圾回收，存储在堆中
+```
+
+
+栈内存 (Stack)
+- 存储基本类型值和引用类型的地址
+- 存储执行上下文
+- 函数调用时压栈，返回时出栈
+- 速度快，但空间有限
+
+堆内存 (Heap)
+- 存储对象和闭包中的变量
+- 垃圾回收器管理
+- 空间大，但访问相对较慢
